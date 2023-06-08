@@ -1,0 +1,61 @@
+{
+  "name": "cosmicord.js",
+  "version": "1.0.0",
+  "description": "Cosmicord.js is a powerful and intuitive Lavalink wrapper designed to simplify the process of integrating Lavalink into your Node.js applications.",
+  "main": "dist",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SudhanPlayz/Cosmicord.js.git"
+  },
+  "license": "GNU GPLv3",
+  "types": "./typings/index.d.ts",
+  "keywords": [
+    "lavalink",
+    "wrapper",
+    "discord",
+    "music",
+    "player",
+    "audio",
+    "voice",
+    "node",
+    "nodejs",
+    "js",
+    "javascript",
+    "typescript",
+    "ts",
+    "cosmicord",
+    "cosmicord.js",
+    "cosmicordjs",
+    "cosmicord-js"
+  ],
+  "contributors": [
+    {
+      "name": "SudhanPlayz",
+      "url": "https://github.com/SudhanPlayz"
+    },
+    {
+      "name": "NotWrench",
+      "url": "https://github.com/NotWrench"
+    }
+  ],
+  "scripts": {
+    "build": "rm -rf dist && tsc",
+    "test": "yarn build && node dist/test",
+    "docs": "tsc && docgen --source dist --custom docs/index.yml --output docs/master.json",
+    "publish": "yarn build && npm publish --access public"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "@types/node-fetch": "^2.6.3",
+    "@types/ws": "^8.5.4",
+    "discord.js": "^14.11.0",
+    "@discordjs/docgen": "^0.11.1",
+    "tslib": "^2.5.0",
+    "typescript": "^5.0.2"
+  },
+  "dependencies": {
+    "@discordjs/collection": "^1.4.0",
+    "node-fetch": "^2.6.9",
+    "ws": "^8.13.0"
+  }
+}
