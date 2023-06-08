@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://cosmicordjs.now.sh/logo.png" width="100" height="100" />
+    <img src="https://media.discordapp.net/attachments/1113373125086814320/1116284868897296384/CosmicordBanner.png"/>
 </p>
 
 # About
