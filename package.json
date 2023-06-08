@@ -41,7 +41,7 @@
   "scripts": {
     "build": "rm -rf dist && tsc",
     "test": "yarn build && node dist/test",
-    "docs": "typedoc --json docs/typedoc.json src/index.ts && tsc && node docs/generate.js",
+    "docs": "typedoc --json docs/typedoc.json src/index.ts --commentStyle all && tsc && node docs/generate.js",
     "publish": "yarn build && npm publish --access public"
   },
   "devDependencies": {
