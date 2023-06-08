@@ -16,79 +16,37 @@ export interface CosmiNode {
 }
 
 export class CosmiNode extends EventEmitter {
-  /**
-   * The host for the node.
-   * @type {string}
-   */
+  /** The host for the node. */
   public host: string;
 
-  /**
-   * The port for the node.
-   * @default 2333
-   * @type {number}
-   */
+  /** The port for the node. */
   public port: number = 2333;
 
-  /**
-   * The password for the node.
-   * @default "youshallnotpass"
-   * @type {string}
-   */
+  /** The password for the node. */
   public password: string = "youshallnotpass";
 
-  /**
-   * Whether the host uses SSL.
-   * @default false
-   * @type {boolean}
-   */
+  /** Whether the node is secure or not. */
   public secure: boolean = false;
 
-  /**
-   * The identifier for the node.
-   * @default "Cosmicord"
-   * @type {string}
-   */
+  /** The identifier for the node. */
   public identifier: string = "Cosmicord";
 
-  /**
-   * The retryAmount for the node.
-   * @default 5
-   * @type {number}
-   */
+  /** The amount of retries for the node. */
   public retryAmount: number = 5;
 
-  /**
-   * The amount of retries for the node.
-   * @default 0
-   * @type {number}
-   */
+  /** The amount of retries made for the node. */
   private retries: number = 0;
 
-  /**
-   * The retryDelay for the node.
-   * @default 5000
-   * @type {number}
-   */
+  /** The delay for the node. */
   public retryDelay: number = 5000;
 
-  /**
-   * The timeout used for api calls
-   * @default 10000
-   * @type {number}
-   */
+  /** The request timeout for the node. */
   public requestTimeout: number = 10000;
 
-  /**
-   * Whether the node is connected or not.
-   * @type {boolean}
-   * @default false
-   */
+  /** Whether the node is connected or not. */
   public connected: boolean = false;
 
-  /**
-   * The stats for the node.
-   * @type {NodeStats}
-   */
+  /** The stats for the node. */
   public stats: NodeStats = {
     players: 0,
     playingPlayers: 0,
@@ -106,61 +64,31 @@ export class CosmiNode extends EventEmitter {
     },
   };
 
-  /**
-   * The amount of public calls made to the node.
-   * @type {number}
-   * @default 0
-   */
+  /** The amount of calls made to the node. */
   public calls: number = 0;
 
-  /**
-   * Websocket for the node.
-   * @type {CosmiSocket}
-   */
+  /** The socket for the node. */
   public socket: CosmiSocket;
 
-  /**
-   * Lavalink version for the node.
-   * @type {string}
-   */
+  /** The version for the node. */
   public version?: string;
 
-  /**
-   * The rest for the node.
-   * @type {CosmiREST}
-   */
+  /** The rest client for the node. */
   public rest: CosmiREST;
 
-  /**
-   * The manager for the node.
-   * @type {Cosmicord}
-   */
+  /** The manager of the node */
   public manager: Cosmicord;
 
-  /**
-   * The players in the node.
-   * @type {Collection<string, CosmiPlayer>}
-   */
+  /** Players of the node. */
   public players: Collection<string, CosmiPlayer>;
 
-  /**
-   * The client id for the node.
-   * @type {string}
-   */
+  /** The client id of the bot */
   public clientId?: string;
 
-  /**
-   * Whether the node is ready or not.
-   * @type {boolean}
-   * @default false
-   */
+  /** Whether the node is ready or not. */
   public isReady: boolean = false;
 
-  /**
-   * Creates a new Node instance
-   * @param {Cosmicord} manager The manager for the node.
-   * @param {CosmiNodeOptions} options The options for the node.
-   */
+  /** Creates a new node. */
   constructor(manager: Cosmicord, options: CosmiNodeOptions) {
     super();
 
@@ -177,10 +105,7 @@ export class CosmiNode extends EventEmitter {
     this.players = manager.players;
   }
 
-  /**
-   * Connect the socket to the node.
-   * @returns {Promise<boolean>} Whether the node connected or not.
-   */
+  /** Connect to the node with websocket. */
   public connectSocket(): Promise<boolean> {
     return new Promise((res) => {
       this.socket = new CosmiSocket(
@@ -208,17 +133,12 @@ export class CosmiNode extends EventEmitter {
     });
   }
 
-  /**
-   * @type {string} The url for the node.
-   */
+  /** Get the url for the node. */
   public get url(): string {
     return `${this.secure ? "https" : "http"}://${this.host}:${this.port}`;
   }
 
-  /**
-   * Connect the socket to the node.
-   * @returns {Promise<boolean>} Whether the node connected or not.
-   */
+  /** Connects to the node. */
   public connect(): Promise<boolean> {
     return new Promise(async (res) => {
       try {
@@ -244,10 +164,7 @@ export class CosmiNode extends EventEmitter {
     });
   }
 
-  /**
-   * Destroy the node.
-   * @returns {void}
-   */
+  /** Destroys the node. */
   public destroy(): void {
     if (this.socket) this.socket.close();
     if (this.rest) delete this.rest;
@@ -259,10 +176,7 @@ export class CosmiNode extends EventEmitter {
     this.manager.nodes = this.manager.nodes.filter((n) => n.url !== this.url);
   }
 
-  /**
-   * Reconnect the node.
-   * @returns {Promise<boolean>} Whether the node reconnected or not.
-   */
+  /** Reconnects to the node. */
   public reconnect(): Promise<boolean> {
     return new Promise(async (res) => {
       this.destroy();

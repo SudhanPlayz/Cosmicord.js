@@ -7,25 +7,13 @@ const collection_1 = require("@discordjs/collection");
 const _1 = require(".");
 class Cosmicord extends stream_1.EventEmitter {
     options;
-    /**
-     * The nodes for the cosmicord client.
-     * @type {CosmiNode[]}
-     */
+    /** The nodes for the cosmicord client. */
     nodes = [];
-    /**
-     * The client id
-     * @type {string}
-     */
+    /** The client id */
     clientId;
-    /**
-     * The players for the cosmicord client.
-     * @type {Collection<string, CosmiPlayer>}
-     */
+    /** The players for the cosmicord client. */
     players = new collection_1.Collection();
-    /**
-     * Creates a new cosmicord client.
-     * @param {CosmiOptions} options The options for the cosmicord client.
-     */
+    /** The constructor for the cosmicord client. */
     constructor(options) {
         super();
         this.options = options;
@@ -37,11 +25,7 @@ class Cosmicord extends stream_1.EventEmitter {
             }
         }
     }
-    /**
-     * Initializes the cosmicord client.
-     * @param {string} clientId - The client id.
-     * @returns {Promise<void>}
-     */
+    /** Initializes the cosmicord client. */
     async init(clientId) {
         if (!this.nodes.length || this.nodes.length < 1)
             throw new Error("No nodes were provided.");
@@ -53,12 +37,7 @@ class Cosmicord extends stream_1.EventEmitter {
             await node.connect();
         }
     }
-    /**
-     * Searches a track.
-     * @param {CosmiSearchQuery} query - The query to search for.
-     * @param {string} requesterId - The requester id.
-     * @returns {Promise<CosmiLoadedTracks>}
-     */
+    /** Searches for tracks. */
     async search(query, requesterId) {
         const node = this.getLeastUsedNode();
         if (!node)
@@ -80,30 +59,17 @@ class Cosmicord extends stream_1.EventEmitter {
         }
         return cosmiTracks;
     }
-    /**
-     * Creates a new node.
-     * @param {CosmiNodeOptions} options - The options for the node.
-     * @returns {CosmiNode}
-     */
+    /** Creates a new node. */
     createNode(options) {
         const node = new _1.CosmiNode(this, options);
         this.nodes.push(node);
         return node;
     }
-    /**
-     * Destroys a node.
-     * @param {CosmiNode} node - The node to destroy.
-     * @returns {void}
-     */
+    /** Destroys a node. */
     destoryNode(node) {
         node.destroy();
     }
-    /**
-     * Creates a new player.
-     * @param {CosmiPlayerOptions} options - The options for the player.
-     * @param {CosmiNode} node - The node to create the player on.
-     * @returns {CosmiPlayer}
-     */
+    /** Creates a new player. */
     createPlayer(options, node = this.getLeastUsedNode()) {
         if (!node)
             throw new Error("No nodes were found.");
@@ -115,21 +81,14 @@ class Cosmicord extends stream_1.EventEmitter {
         node.emit("playerCreated", player);
         return player;
     }
-    /**
-     * Destroys a player.
-     * @param {string} guildId - The guild id of the player.
-     * @returns {void}
-     */
+    /** Destroys a player. */
     destroyPlayer(guildId) {
         const player = this.players.get(guildId);
         if (!player)
             throw new Error("No player was found with the given guild id.");
         player.destroy();
     }
-    /**
-     * Get the least used node.
-     * @returns {CosmiNode}
-     */
+    /** Gets a player. */
     getLeastUsedNode() {
         return this.nodes.reduce((prev, curr) => {
             if (prev.stats.players > curr.stats.players)
@@ -137,11 +96,7 @@ class Cosmicord extends stream_1.EventEmitter {
             return prev;
         });
     }
-    /**
-     * Updates the voice state from a discord voice packet.
-     * @param {VoicePacket | VoiceServer | VoiceState} data - The data to update the voice state with.
-     * @returns {Promise<void>}
-     */
+    /** Gets a player. */
     async updateVoiceState(data) {
         if ("t" in data &&
             !["VOICE_STATE_UPDATE", "VOICE_SERVER_UPDATE"].includes(data.t))

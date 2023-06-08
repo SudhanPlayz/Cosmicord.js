@@ -5,152 +5,58 @@ import { PlayerState } from "../interfaces";
 export declare class CosmiPlayer extends EventEmitter {
     node: CosmiNode;
     options: CosmiPlayerOptions;
-    /**
-     * The guild id where the player is created
-     * @type {string}
-     */
+    /** The guild id of the player. */
     guildId: string;
-    /**
-     * If the player is paused or not
-     * @type {boolean}
-     * @default false
-     */
+    /** Whether the player is paused or not. */
     paused: boolean;
-    /**
-     * Whether loop is enabled or not
-     * @type {boolean}
-     * @default false
-     */
+    /** Whether the player is playing or not. */
     loop: boolean;
-    /**
-     * If the player is playing or not
-     * @type {boolean}
-     * @default false
-     */
+    /** Whether the player is playing or not. */
     playing: boolean;
-    /**
-     * The queue of the player
-     * @type {CosmiQueue}
-     */
+    /** Queue for the player. */
     queue: CosmiQueue;
-    /**
-     * The position of the player
-     * @type {number}
-     */
+    /** Position of the current track. */
     position: number;
-    /**
-     * The voice state of the player
-     * @type {VoiceState}
-     */
+    /** Voice State of the player. */
     voiceState: VoiceState;
-    /**
-     * The session id
-     * @type {string}
-     */
+    /** Session Id of the player. */
     sessionId?: string;
-    /**
-     * The voice channel the player is connected to
-     * @type {string}
-     */
+    /** Voice Channel of the player. */
     voiceChannel?: string;
-    /**
-     * The text channel the player is using
-     * @type {string}
-     */
+    /** Text Channel of the player. */
     textChannel?: string;
-    /**
-     * Whether the player is self muted or not
-     * @type {boolean}
-     */
+    /** Whether the player is self muted or not. */
     selfMute?: boolean;
-    /**
-     * Whether the player is self deafened or not
-     * @type {boolean}
-     */
+    /** Whether the player is self deafened or not. */
     selfDeaf?: boolean;
-    /**
-     * The volume of the player
-     * @type {number}
-     * @default 100
-     */
+    /** Volume of the player. */
     volume?: number;
-    /**
-     * The state of the player
-     * @type {PlayerState}
-     */
+    /** State of the player. */
     state: PlayerState;
-    /**
-     * The filters of the player
-     * @type {Filters}
-     */
+    /** Filters for the player. */
     filters?: Filters;
-    /**
-     * Creates a new player
-     * @param {CosmiNode} node - The node the player is connected to
-     * @param {CosmiPlayerOptions} options - The options for the player
-     */
+    /** Creates a new player */
     constructor(node: CosmiNode, options: CosmiPlayerOptions);
-    /**
-     * Connects the player to the voice channel
-     * @returns {Promise<CosmiPlayer>}
-     */
+    /** Connects the player to the voice channel. */
     connect(): Promise<CosmiPlayer>;
-    /**
-     * Destroys the player
-     * @param {boolean} disconnect - Whether to disconnect the player or not
-     * @returns {void}
-     */
+    /** Destroys the player. */
     destroy(disconnect?: boolean): void;
-    /**
-     * Disconnects the player from the voice channel
-     * @returns {CosmiPlayer}
-     */
+    /** Disconnects the player from the voice channel. */
     disconnect(): this;
-    /**
-     * Pauses the player
-     * @param {boolean} pause - Whether to pause the player or not
-     * @returns {CosmiPlayer}
-     */
+    /** Sets the paused state of the player. */
     pause(pause: boolean): this;
-    /**
-     * Plays the first track in the queue
-     * @returns {Promise<CosmiPlayer>}
-     */
+    /** Plays the next track in the queue. */
     play(): Promise<this>;
-    /**
-     * Sets the voice channel of the player
-     * @param {string} channel - The voice channel id to set
-     * @returns {CosmiPlayer}
-     */
+    /** Sets the voice channel of the player. */
     setVoiceChannel(channel: string): this;
-    /**
-     * Sets the text channel of the player
-     * @param {string} channel - The text channel id to set
-     * @returns {CosmiPlayer}
-     */
+    /** Sets the text channel of the player. */
     setTextChannel(channel: string): this;
-    /**
-     * Sets the volume of the player
-     * @param {number} volume - The volume to set
-     * @returns {CosmiPlayer}
-     */
+    /** Sets the volume of the player. */
     setVolume(volume: number): this;
-    /**
-     * Sets the loop
-     * @param {boolean} loop - Whether to loop or not
-     * @returns {CosmiPlayer}
-     */
+    /** Sets the loop state of the player. */
     setLoop(loop: boolean): this;
-    /**
-     * Stops the current track.
-     * @param {number} amount - The amount of tracks to skip.
-     * @returns {CosmiPlayer}
-     */
+    /** Stops the current track, or skips to the next one. */
     stop(amount?: number): this;
-    /**
-     * Seeks to a position in the current track.
-     * @param {number} position - The position to seek to.
-     * @returns {CosmiPlayer}
-     */
+    /** Seeks to the specified position in the current track. */
     seek(position: number): this;
 }

@@ -2,42 +2,23 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CosmiQueue = void 0;
 class CosmiQueue extends Array {
-    /**
-     * The current track.
-     * @type {CosmiTrack}
-     */
+    /** The current track. */
     current;
-    /**
-     * The previous track.
-     * @type {CosmiTrack}
-     */
+    /** The previous track. */
     previous;
-    /**
-     * The duration of the queue.
-     * @returns {number}
-     */
+    /** The duration of the queue. */
     duration() {
         return this.reduce((acc, cur) => acc + cur.duration, this.current?.duration || 0);
     }
-    /**
-     * Clears the queue.
-     * @returns {void}
-     */
+    /** Clears the queue. */
     clear() {
         this.length = 0;
     }
-    /**
-     * Shuffles the queue.
-     * @returns {void}
-     */
+    /** Shuffles the queue. */
     shuffle() {
         this.sort(() => Math.random() - 0.5);
     }
-    /**
-     * Adds a track (or multiple tracks) to the queue.
-     * @param {CosmiTrack | CosmiTrack[]} tracks - The track(s) to add.
-     * @returns {CosmiQueue}
-     */
+    /** Adds a track to the queue. */
     add(tracks) {
         if (!this.current) {
             if (Array.isArray(tracks)) {
@@ -57,12 +38,7 @@ class CosmiQueue extends Array {
             this.push(tracks);
         }
     }
-    /**
-     * Removes a track or a range of tracks.
-     * @param {number} startOrPosition - The start position or the position of the track to remove.
-     * @param {number} [end] - The end position.
-     * @returns {CosmiTrack | CosmiTrack[]}
-     */
+    /** Removes the track at the specified position or the tracks in the specified range. */
     remove(startOrPosition, end) {
         if (startOrPosition !== null &&
             (startOrPosition < 0 || startOrPosition >= this.length))

@@ -13,101 +13,53 @@ import {
 } from "../interfaces";
 
 export class CosmiREST {
-  /**
-   * The base URL of the REST API
-   * @type {string}
-   */
+  /** The base URL of the REST API */
   public baseURL: string;
 
-  /**
-   * The lavalink node
-   * @type {CosmiNode}
-   */
+  /** The cosminode */
   public node: CosmiNode;
 
-  /**
-   * The timeout for requests
-   * @type {number}
-   */
+  /** The timeout for requests */
   public timeout: number;
 
-  /**
-   * Creates a new RestAPI instance
-   * @param {CosmiNode} node - The cosminode
-   * @param {string} baseURL - The base URL of the REST API
-   * @param {number} timeout - The timeout for requests
-   */
+  /** Creates a new REST API */
   constructor(node: CosmiNode, baseURL: string, timeout: number) {
     this.node = node;
     this.baseURL = baseURL;
     this.timeout = timeout;
   }
 
-  /**
-   * Sets the base URL of the REST API
-   * @param {string} baseURL - The base URL of the REST API
-   * @returns {void}
-   */
+  /** Sets the base URL of the REST API */
   public setBaseURL(baseURL: string) {
     this.baseURL = baseURL;
   }
 
-  /**
-   * Sends a GET request to the REST API
-   * @param {string} endpoint - The endpoint to send the request to
-   * @returns {any} The response
-   */
+  /** Sends a GET request to the REST API */
   public async get(endpoint: string): Promise<any> {
     return this.request("GET", endpoint);
   }
 
-  /**
-   * Sends a POST request to the REST API
-   * @param {string} endpoint - The endpoint to send the request to
-   * @param {BodyInit} body - The body to send
-   * @returns {any} The response
-   */
+  /** Sends a POST request to the REST API */
   public async post(endpoint: string, body?: BodyInit): Promise<any> {
     return this.request("POST", endpoint, body);
   }
 
-  /**
-   * Sends a PUT request to the REST API
-   * @param {string} endpoint - The endpoint to send the request to
-   * @param {BodyInit} body - The body to send
-   * @returns {any} The response
-   */
+  /** Sends a PUT request to the REST API */
   public async put(endpoint: string, body?: BodyInit): Promise<any> {
     return this.request("PUT", endpoint, body);
   }
 
-  /**
-   * Sends a DELETE request to the REST API
-   * @param {string} endpoint - The endpoint to send the request to
-   * @returns {any} The response
-   */
+  /** Sends a DELETE request to the REST API */
   public async delete(endpoint: string): Promise<any> {
     return this.request("DELETE", endpoint);
   }
 
-  /**
-   * Sends a PATCH request to the REST API
-   * @param {string} endpoint - The endpoint to send the request to
-   * @param {BodyInit} body - The body to send
-   * @returns {any} The response
-   */
+  /** Sends a PATCH request to the REST API */
   public async patch(endpoint: string, body?: BodyInit): Promise<any> {
     return this.request("PATCH", endpoint, body);
   }
 
-  /**
-   * Sends a request to the REST API
-   * @param {string} method - The method to use
-   * @param {string} endpoint - The endpoint to send the request to
-   * @param {BodyInit} body - The body to send
-   * @param {boolean} text - Whether to return the response as text
-   * @returns {any} The response
-   */
+  /** Sends a request to the REST API and returns the text/json */
   public async request(
     method: string,
     endpoint: string,
@@ -132,21 +84,12 @@ export class CosmiREST {
     return json;
   }
 
-  /**
-   * Checks if the response is an error
-   * @param {any} res - The response
-   * @returns {boolean} Whether the response is an error
-   */
+  /** Checks if the response is an error */
   public isError(res: any): res is RestError {
     return "error" in res;
   }
 
-  /**
-   * Get all the players from a session
-   * @param {string} sessionId - The session to get the players from
-   * @param {boolean} trace - Whether to include the trace
-   * @returns {RestPlayer[]} The players
-   */
+  /** Gets the info of the node */
   public async getPlayersFromSession(
     sessionId: string,
     trace = false
@@ -157,13 +100,7 @@ export class CosmiREST {
     return res as RestPlayer[];
   }
 
-  /**
-   * Returns the player for this guild in this session.
-   * @param {string} sessionId - The session to get the player from
-   * @param {string} guildId - The guild id of the player
-   * @param {boolean} trace - Whether to include the trace
-   * @returns {RestPlayer} The player
-   */
+  /** Returns the player for this guild if it exists. */
   public async getPlayer(
     sessionId: string,
     guildId: string,
@@ -177,15 +114,7 @@ export class CosmiREST {
     return res as RestPlayer;
   }
 
-  /**
-   * Updates or creates the player for this guild if it doesn't already exist.
-   * @param {string} sessionId - The session to update the player from
-   * @param {string} guildId - The guild id of the player
-   * @param {RestPlayerUpdate} options - The options to update the player with
-   * @param {boolean} noReplace - Whether to replace the player or not
-   * @param {boolean} trace - Whether to include the trace
-   * @returns {RestPlayer} The player
-   */
+  /** Updates or creates the player for this guild. */
   public async updatePlayer(
     sessionId: string,
     guildId: string,
@@ -202,13 +131,7 @@ export class CosmiREST {
     return res as RestPlayer;
   }
 
-  /**
-   * Deletes the player for this guild.
-   * @param {string} sessionId - The session to delete the player from
-   * @param {string} guildId - The guild id of the player
-   * @param {boolean} trace - Whether to include the trace
-   * @returns {void}
-   */
+  /** Deletes the player for this guild. */
   public async deletePlayer(
     sessionId: string,
     guildId: string,
@@ -220,14 +143,7 @@ export class CosmiREST {
     if (this.isError(res)) throw new Error(res.error);
   }
 
-  /**
-   * Updates the session with a resuming key and timeout.
-   * @param {string} sessionId - The session to update
-   * @param {string} resumingKey - The resuming key
-   * @param {number} timeout - The timeout
-   * @param {boolean} trace - Whether to include the trace
-   * @returns {RestSessionInfo} The session info
-   */
+  /** Update session information */
   public async updateSession(
     sessionId: string,
     resumingKey?: string,
@@ -243,11 +159,7 @@ export class CosmiREST {
     return res as RestSessionInfo;
   }
 
-  /**
-   * Loads a track
-   * @param {string} identifier - The track identifier
-   * @returns {RestTrackLoadResult} The track load result
-   */
+  /** Loads the tracks from the node */
   public async loadTracks(
     identifier: string
   ): Promise<RestTrackLoadResult> {
@@ -259,12 +171,7 @@ export class CosmiREST {
     return res as RestTrackLoadResult;
   }
 
-  /**
-   * Decode a single track into its info, where BASE64 is the encoded base64 data.
-   * @param {string} base64 - The base64 data
-   * @param {boolean} trace - Whether to include the trace
-   * @returns {RestTrackDecode} The decoded track
-   */
+  /** Decodes the track */
   public async decodeTrack(
     base64: string,
     trace = false
@@ -277,12 +184,7 @@ export class CosmiREST {
     return res as RestTrackDecode;
   }
 
-  /**
-   * Decode multiple tracks
-   * @param {string[]} trackData - The track data
-   * @param {boolean} trace - Whether to include the trace
-   * @returns {RestTrack[]} The decoded tracks
-   */
+  /** Decode multiple tracks */
   public async decodeTracks(
     trackData: string[],
     trace = false
@@ -296,11 +198,7 @@ export class CosmiREST {
     return res as RestTrack[];
   }
 
-  /**
-   * Get lavalink info
-   * @param {boolean} trace - Whether to include the trace
-   * @returns {RestInfo} The info
-   */
+  /** Get lavalink info */
   public async getInfo(trace = false): Promise<RestInfo> {
     const res = await this.get(`/info?trace=${trace}`);
     if (this.isError(res)) throw new Error(res.error);
@@ -308,11 +206,7 @@ export class CosmiREST {
     return res as RestInfo;
   }
 
-  /**
-   * Get lavalink stats
-   * @param {boolean} trace - Whether to include the trace
-   * @returns {RestLavalinkStats} The stats
-   */
+  /** Get lavalink stats */
   public async getStats(trace = false): Promise<RestLavalinkStats> {
     const res = await this.get(`/stats?trace=${trace}`);
     if (this.isError(res)) throw new Error(res.error);
@@ -320,10 +214,7 @@ export class CosmiREST {
     return res as RestLavalinkStats;
   }
 
-  /**
-   * Get lavalink version
-   * @returns {string} The version
-   */
+  /** Get lavalink version */
   public async getVersion(): Promise<string> {
     const res = await this.request("GET", "/version", null, true);
 

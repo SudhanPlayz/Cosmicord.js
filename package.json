@@ -7,7 +7,7 @@
     "type": "git",
     "url": "git+https://github.com/SudhanPlayz/Cosmicord.js.git"
   },
-  "license": "GNU GPLv3",
+  "license": "GPL-3.0",
   "types": "./typings/index.d.ts",
   "keywords": [
     "lavalink",
@@ -41,16 +41,21 @@
   "scripts": {
     "build": "rm -rf dist && tsc",
     "test": "yarn build && node dist/test",
-    "docs": "tsc && docgen --source dist --custom docs/index.yml --output docs/master.json",
+    "docs": "typedoc --json docs/typedoc.json src/index.ts && tsc && node docs/generate.js",
     "publish": "yarn build && npm publish --access public"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.22.4",
+    "@babel/preset-typescript": "^7.21.5",
+    "@discordjs/ts-docgen": "^0.4.1",
     "@types/node": "^18.15.11",
     "@types/node-fetch": "^2.6.3",
     "@types/ws": "^8.5.4",
     "discord.js": "^14.11.0",
-    "@discordjs/docgen": "^0.11.1",
+    "js-yaml": "^4.1.0",
+    "jsdoc-babel": "^0.5.0",
     "tslib": "^2.5.0",
+    "typedoc": "^0.24.8",
     "typescript": "^5.0.2"
   },
   "dependencies": {

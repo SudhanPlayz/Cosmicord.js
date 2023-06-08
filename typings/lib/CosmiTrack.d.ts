@@ -1,75 +1,33 @@
 import { RestTrack } from "../interfaces";
 export declare class CosmiTrack {
-    /**
-     * The track duration in milliseconds
-     * @type {number}
-     */
+    /** The duration of the track. */
     duration: number;
-    /**
-     * The requester ID
-     * @type {string}
-     */
+    /** The requester ID of the track. */
     requesterId?: string;
-    /**
-     * The encoded track
-     * @type {string}
-     */
+    /** The encoded track. */
     encoded?: string;
-    /**
-     * The track identifier
-     * @type {string}
-     */
+    /** The track identifier. */
     identifier: string;
-    /**
-     * Whether the track is seekable or not
-     * @type {boolean}
-     */
+    /** Whether the track is seekable. */
     isSeekable: boolean;
-    /**
-     * The track author
-     * @type {string}
-     */
+    /** The author of the track. */
     author: string;
-    /**
-     * The track length
-     * @type {number}
-     */
+    /** The length of the track. */
     length: number;
-    /**
-     * Whether the track is a stream or not
-     * @type {boolean}
-     */
+    /** Whether the track is a stream or not. */
     isStream: boolean;
-    /**
-     * The track position
-     * @type {number}
-     */
+    /** The position of the track. */
     position: number;
-    /**
-     * The track title
-     * @type {string}
-     */
+    /** The title of the track. */
     title: string;
-    /**
-     * The track source name
-     * @type {string}
-     */
+    /** The source name of the track. */
     sourceName: string;
-    /**
-     * The track uri
-     * @type {string}
-     */
+    /** The uri of the track. */
     uri?: string;
-    /**
-     * The track thumbnail
-     * @returns {string}
-     */
+    /** The thumbnail of the track. */
     get thumbnail(): string;
+    /** Creates a new track. */
     constructor(data: RestTrack, requesterId?: string);
-    /**
-     * Displays the thumbnail of the track.
-     * @param {"default" | "mqdefault" | "hqdefault" | "sddefault" | "maxresdefault"} size - The size of the thumbnail.
-     * @returns {string}
-     */
+    /** Returns the thumbnail of the track. */
     displayThumbnail(size?: "default" | "mqdefault" | "hqdefault" | "sddefault" | "maxresdefault"): string;
 }

@@ -7,140 +7,54 @@ export interface CosmiNode {
     emit<Key extends keyof NodeEvents>(event: Key, ...args: NodeEvents[Key]): boolean;
 }
 export declare class CosmiNode extends EventEmitter {
-    /**
-     * The host for the node.
-     * @type {string}
-     */
+    /** The host for the node. */
     host: string;
-    /**
-     * The port for the node.
-     * @default 2333
-     * @type {number}
-     */
+    /** The port for the node. */
     port: number;
-    /**
-     * The password for the node.
-     * @default "youshallnotpass"
-     * @type {string}
-     */
+    /** The password for the node. */
     password: string;
-    /**
-     * Whether the host uses SSL.
-     * @default false
-     * @type {boolean}
-     */
+    /** Whether the node is secure or not. */
     secure: boolean;
-    /**
-     * The identifier for the node.
-     * @default "Cosmicord"
-     * @type {string}
-     */
+    /** The identifier for the node. */
     identifier: string;
-    /**
-     * The retryAmount for the node.
-     * @default 5
-     * @type {number}
-     */
+    /** The amount of retries for the node. */
     retryAmount: number;
-    /**
-     * The amount of retries for the node.
-     * @default 0
-     * @type {number}
-     */
+    /** The amount of retries made for the node. */
     private retries;
-    /**
-     * The retryDelay for the node.
-     * @default 5000
-     * @type {number}
-     */
+    /** The delay for the node. */
     retryDelay: number;
-    /**
-     * The timeout used for api calls
-     * @default 10000
-     * @type {number}
-     */
+    /** The request timeout for the node. */
     requestTimeout: number;
-    /**
-     * Whether the node is connected or not.
-     * @type {boolean}
-     * @default false
-     */
+    /** Whether the node is connected or not. */
     connected: boolean;
-    /**
-     * The stats for the node.
-     * @type {NodeStats}
-     */
+    /** The stats for the node. */
     stats: NodeStats;
-    /**
-     * The amount of public calls made to the node.
-     * @type {number}
-     * @default 0
-     */
+    /** The amount of calls made to the node. */
     calls: number;
-    /**
-     * Websocket for the node.
-     * @type {CosmiSocket}
-     */
+    /** The socket for the node. */
     socket: CosmiSocket;
-    /**
-     * Lavalink version for the node.
-     * @type {string}
-     */
+    /** The version for the node. */
     version?: string;
-    /**
-     * The rest for the node.
-     * @type {CosmiREST}
-     */
+    /** The rest client for the node. */
     rest: CosmiREST;
-    /**
-     * The manager for the node.
-     * @type {Cosmicord}
-     */
+    /** The manager of the node */
     manager: Cosmicord;
-    /**
-     * The players in the node.
-     * @type {Collection<string, CosmiPlayer>}
-     */
+    /** Players of the node. */
     players: Collection<string, CosmiPlayer>;
-    /**
-     * The client id for the node.
-     * @type {string}
-     */
+    /** The client id of the bot */
     clientId?: string;
-    /**
-     * Whether the node is ready or not.
-     * @type {boolean}
-     * @default false
-     */
+    /** Whether the node is ready or not. */
     isReady: boolean;
-    /**
-     * Creates a new Node instance
-     * @param {Cosmicord} manager The manager for the node.
-     * @param {CosmiNodeOptions} options The options for the node.
-     */
+    /** Creates a new node. */
     constructor(manager: Cosmicord, options: CosmiNodeOptions);
-    /**
-     * Connect the socket to the node.
-     * @returns {Promise<boolean>} Whether the node connected or not.
-     */
+    /** Connect to the node with websocket. */
     connectSocket(): Promise<boolean>;
-    /**
-     * @type {string} The url for the node.
-     */
+    /** Get the url for the node. */
     get url(): string;
-    /**
-     * Connect the socket to the node.
-     * @returns {Promise<boolean>} Whether the node connected or not.
-     */
+    /** Connects to the node. */
     connect(): Promise<boolean>;
-    /**
-     * Destroy the node.
-     * @returns {void}
-     */
+    /** Destroys the node. */
     destroy(): void;
-    /**
-     * Reconnect the node.
-     * @returns {Promise<boolean>} Whether the node reconnected or not.
-     */
+    /** Reconnects to the node. */
     reconnect(): Promise<boolean>;
 }

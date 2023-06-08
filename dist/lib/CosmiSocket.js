@@ -4,21 +4,13 @@ exports.CosmiSocket = void 0;
 const tslib_1 = require("tslib");
 const ws_1 = tslib_1.__importDefault(require("ws"));
 class CosmiSocket extends ws_1.default {
-    /**
-     * The cosmicord client
-     * @type {Cosmicord}
-     */
+    /** The cosmicord manager */
     manager;
-    /**
-     * The lavalink node
-     * @type {CosmiNode}
-     */
+    /** The cosminode */
     node;
-    /**
-     * The session id
-     * @type {string}
-     */
+    /** The session id of the socket */
     sessionId;
+    /** Creates a new websocket */
     constructor(manager, node, url, options) {
         super(url, options);
         this.manager = manager;
@@ -44,11 +36,7 @@ class CosmiSocket extends ws_1.default {
             }
         });
     }
-    /**
-     * Sends data to the websocket
-     * @param {any} data - The data to send
-     * @returns {Promise<boolean>}
-     */
+    /** Sends data to the websocket */
     sendData(data) {
         return new Promise((resolve, reject) => {
             if (!data || !JSON.stringify(data).startsWith("{")) {
@@ -65,21 +53,13 @@ class CosmiSocket extends ws_1.default {
             });
         });
     }
-    /**
-     * Emits when the websocket is ready
-     * @param {ReadyPayload} payload - The payload of the ready event
-     * @returns {void}
-     */
+    /** Emits when the socket is ready */
     ready(payload) {
         this.sessionId = payload.sessionId;
         this.node.isReady = true;
         this.node.emit("connected");
     }
-    /**
-     * Emits when an event is received
-     * @param {EventsPayload} payload - The payload of the event
-     * @returns {void}
-     */
+    /** Emits when a event is received */
     event(payload) {
         switch (payload.type) {
             case "TrackStartEvent":
@@ -99,11 +79,7 @@ class CosmiSocket extends ws_1.default {
                 break;
         }
     }
-    /**
-     * Emits when stats are received
-     * @param {StatsPayload} payload - The payload of the stats
-     * @returns {void}
-     */
+    /** Emits when stats are received */
     stats(payload) {
         let stats = {
             players: payload.players,
@@ -125,22 +101,14 @@ class CosmiSocket extends ws_1.default {
         this.node.emit("stats", stats);
         this.manager.emit("nodeStats", this.node, stats);
     }
-    /**
-     * Emits when the player is updated
-     * @param {PlayerUpdatePayload} payload - The payload of the player update
-     * @returns {void}
-     */
+    /** Emits when a player is updated */
     playerUpdate(payload) {
         const player = this.manager.players.get(payload.guildId);
         if (!player)
             return;
         player.position = payload.state.position || 0;
     }
-    /**
-     * Emits when a track starts
-     * @param {TrackStartEventPayload} payload - The payload of the track start event
-     * @returns {void}
-     */
+    /** Emits when a track starts */
     trackStart(payload) {
         const player = this.manager.players.get(payload.guildId);
         if (!player)
@@ -149,11 +117,7 @@ class CosmiSocket extends ws_1.default {
         player.paused = false;
         player.node.manager.emit("trackStart", player, player.queue.current);
     }
-    /**
-     * Emits when a track ends
-     * @param {TrackEndEventPayload} payload - The payload of the track end event
-     * @returns {void}
-     */
+    /** Emits when a track ends */
     trackEnd(payload) {
         const player = this.manager.players.get(payload.guildId);
         if (!player)
@@ -168,22 +132,14 @@ class CosmiSocket extends ws_1.default {
             player.play();
         }
     }
-    /**
-     * Emits when a track errors
-     * @param {TrackExceptionEventPayload} payload - The payload of the track error event
-     * @returns {void}
-     */
+    /** Emits when a track errors */
     trackException(payload) {
         const player = this.manager.players.get(payload.guildId);
         if (!player)
             return;
         this.manager.emit("trackError", player, new Error(payload.exception));
     }
-    /**
-     * Emits when a track gets stuck
-     * @param {TrackStuckEventPayload} payload - The payload of the track stuck event
-     * @returns {void}
-     */
+    /** Emits when a track gets stuck */
     trackStuck(payload) {
         const player = this.manager.players.get(payload.guildId);
         if (!player)

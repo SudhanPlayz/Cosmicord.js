@@ -1,22 +1,13 @@
 import { CosmiTrack } from "./CosmiTrack";
 
 export class CosmiQueue extends Array<CosmiTrack> {
-  /**
-   * The current track.
-   * @type {CosmiTrack}
-   */
+  /** The current track. */
   public current?: CosmiTrack;
 
-  /**
-   * The previous track.
-   * @type {CosmiTrack}
-   */
+  /** The previous track. */
   public previous?: CosmiTrack;
 
-  /**
-   * The duration of the queue.
-   * @returns {number}
-   */
+  /** The duration of the queue. */
   public duration() {
     return this.reduce(
       (acc, cur) => acc + cur.duration,
@@ -24,27 +15,17 @@ export class CosmiQueue extends Array<CosmiTrack> {
     );
   }
 
-  /**
-   * Clears the queue.
-   * @returns {void}
-   */
+  /** Clears the queue. */
   public clear() {
     this.length = 0;
   }
 
-  /**
-   * Shuffles the queue.
-   * @returns {void}
-   */
+  /** Shuffles the queue. */
   public shuffle() {
     this.sort(() => Math.random() - 0.5);
   }
 
-  /**
-   * Adds a track (or multiple tracks) to the queue.
-   * @param {CosmiTrack | CosmiTrack[]} tracks - The track(s) to add.
-   * @returns {CosmiQueue}
-   */
+  /** Adds a track to the queue. */
   public add(tracks: CosmiTrack | CosmiTrack[]) {
     if (!this.current) {
       if (Array.isArray(tracks)) {
@@ -65,27 +46,13 @@ export class CosmiQueue extends Array<CosmiTrack> {
     }
   }
 
-  /**
-   * Removes a track
-   * @param {number} position - The position of the track to remove.
-   * @returns {CosmiTrack}
-   */
+  /** Removes the track at the specified position. */
   public remove(position: number): CosmiTrack;
 
-  /**
-   * Removes a range of tracks.
-   * @param {number} start - The start position.
-   * @param {number} end - The end position.
-   * @returns {CosmiTrack[]}
-   */
+  /** Removes the tracks in the specified range. */
   public remove(start: number, end: number): CosmiTrack[];
 
-  /**
-   * Removes a track or a range of tracks.
-   * @param {number} startOrPosition - The start position or the position of the track to remove.
-   * @param {number} [end] - The end position.
-   * @returns {CosmiTrack | CosmiTrack[]}
-   */
+  /** Removes the track at the specified position or the tracks in the specified range. */
   public remove(
     startOrPosition: number,
     end?: number

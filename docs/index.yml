@@ -3,3 +3,7 @@
     - name: Welcome
       id: welcome
       path: ../../README.md
+
+    - name: Get Started
+      id: get-started
+      path: Get Started.md

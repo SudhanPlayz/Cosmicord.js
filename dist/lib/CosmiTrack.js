@@ -2,73 +2,35 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CosmiTrack = void 0;
 class CosmiTrack {
-    /**
-     * The track duration in milliseconds
-     * @type {number}
-     */
+    /** The duration of the track. */
     duration;
-    /**
-     * The requester ID
-     * @type {string}
-     */
+    /** The requester ID of the track. */
     requesterId;
-    /**
-     * The encoded track
-     * @type {string}
-     */
+    /** The encoded track. */
     encoded;
-    /**
-     * The track identifier
-     * @type {string}
-     */
+    /** The track identifier. */
     identifier;
-    /**
-     * Whether the track is seekable or not
-     * @type {boolean}
-     */
+    /** Whether the track is seekable. */
     isSeekable;
-    /**
-     * The track author
-     * @type {string}
-     */
+    /** The author of the track. */
     author;
-    /**
-     * The track length
-     * @type {number}
-     */
+    /** The length of the track. */
     length;
-    /**
-     * Whether the track is a stream or not
-     * @type {boolean}
-     */
+    /** Whether the track is a stream or not. */
     isStream;
-    /**
-     * The track position
-     * @type {number}
-     */
+    /** The position of the track. */
     position;
-    /**
-     * The track title
-     * @type {string}
-     */
+    /** The title of the track. */
     title;
-    /**
-     * The track source name
-     * @type {string}
-     */
+    /** The source name of the track. */
     sourceName;
-    /**
-     * The track uri
-     * @type {string}
-     */
+    /** The uri of the track. */
     uri;
-    /**
-     * The track thumbnail
-     * @returns {string}
-     */
+    /** The thumbnail of the track. */
     get thumbnail() {
         return `https://img.youtube.com/vi/${this.identifier}/mqdefault.jpg`;
     }
+    /** Creates a new track. */
     constructor(data, requesterId) {
         this.duration = data.info.length;
         this.encoded = data.encoded;
@@ -83,11 +45,7 @@ class CosmiTrack {
         this.uri = data.info.uri;
         this.requesterId = requesterId;
     }
-    /**
-     * Displays the thumbnail of the track.
-     * @param {"default" | "mqdefault" | "hqdefault" | "sddefault" | "maxresdefault"} size - The size of the thumbnail.
-     * @returns {string}
-     */
+    /** Returns the thumbnail of the track. */
     displayThumbnail(size = "default") {
         return `https://img.youtube.com/vi/${this.identifier}/${size}.jpg`;
     }

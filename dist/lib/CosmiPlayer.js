@@ -7,90 +7,37 @@ const interfaces_1 = require("../interfaces");
 class CosmiPlayer extends stream_1.EventEmitter {
     node;
     options;
-    /**
-     * The guild id where the player is created
-     * @type {string}
-     */
+    /** The guild id of the player. */
     guildId;
-    /**
-     * If the player is paused or not
-     * @type {boolean}
-     * @default false
-     */
+    /** Whether the player is paused or not. */
     paused = false;
-    /**
-     * Whether loop is enabled or not
-     * @type {boolean}
-     * @default false
-     */
+    /** Whether the player is playing or not. */
     loop = false;
-    /**
-     * If the player is playing or not
-     * @type {boolean}
-     * @default false
-     */
+    /** Whether the player is playing or not. */
     playing = false;
-    /**
-     * The queue of the player
-     * @type {CosmiQueue}
-     */
+    /** Queue for the player. */
     queue = new _1.CosmiQueue();
-    /**
-     * The position of the player
-     * @type {number}
-     */
+    /** Position of the current track. */
     position = 0;
-    /**
-     * The voice state of the player
-     * @type {VoiceState}
-     */
+    /** Voice State of the player. */
     voiceState;
-    /**
-     * The session id
-     * @type {string}
-     */
+    /** Session Id of the player. */
     sessionId;
-    /**
-     * The voice channel the player is connected to
-     * @type {string}
-     */
+    /** Voice Channel of the player. */
     voiceChannel;
-    /**
-     * The text channel the player is using
-     * @type {string}
-     */
+    /** Text Channel of the player. */
     textChannel;
-    /**
-     * Whether the player is self muted or not
-     * @type {boolean}
-     */
+    /** Whether the player is self muted or not. */
     selfMute;
-    /**
-     * Whether the player is self deafened or not
-     * @type {boolean}
-     */
+    /** Whether the player is self deafened or not. */
     selfDeaf;
-    /**
-     * The volume of the player
-     * @type {number}
-     * @default 100
-     */
+    /** Volume of the player. */
     volume;
-    /**
-     * The state of the player
-     * @type {PlayerState}
-     */
+    /** State of the player. */
     state = interfaces_1.PlayerState.Disconnected;
-    /**
-     * The filters of the player
-     * @type {Filters}
-     */
+    /** Filters for the player. */
     filters;
-    /**
-     * Creates a new player
-     * @param {CosmiNode} node - The node the player is connected to
-     * @param {CosmiPlayerOptions} options - The options for the player
-     */
+    /** Creates a new player */
     constructor(node, options) {
         super();
         this.node = node;
@@ -112,10 +59,7 @@ class CosmiPlayer extends stream_1.EventEmitter {
         this.node.manager.emit("playerCreated", this.node, this);
         this.node.emit("playerCreated", this);
     }
-    /**
-     * Connects the player to the voice channel
-     * @returns {Promise<CosmiPlayer>}
-     */
+    /** Connects the player to the voice channel. */
     async connect() {
         if (!this.voiceChannel)
             throw new RangeError("No voice channel has been set.");
@@ -132,11 +76,7 @@ class CosmiPlayer extends stream_1.EventEmitter {
         this.state = interfaces_1.PlayerState.Connected;
         return this;
     }
-    /**
-     * Destroys the player
-     * @param {boolean} disconnect - Whether to disconnect the player or not
-     * @returns {void}
-     */
+    /** Destroys the player. */
     destroy(disconnect = true) {
         this.state = interfaces_1.PlayerState.Destroying;
         if (disconnect) {
@@ -150,10 +90,7 @@ class CosmiPlayer extends stream_1.EventEmitter {
         this.node.manager.emit("playerDestoryed", this.node, this);
         this.node.manager.players.delete(this.guildId);
     }
-    /**
-     * Disconnects the player from the voice channel
-     * @returns {CosmiPlayer}
-     */
+    /** Disconnects the player from the voice channel. */
     disconnect() {
         if (this.voiceChannel === null)
             return this;
@@ -172,11 +109,7 @@ class CosmiPlayer extends stream_1.EventEmitter {
         this.state = interfaces_1.PlayerState.Disconnected;
         return this;
     }
-    /**
-     * Pauses the player
-     * @param {boolean} pause - Whether to pause the player or not
-     * @returns {CosmiPlayer}
-     */
+    /** Sets the paused state of the player. */
     pause(pause) {
         if (typeof pause !== "boolean")
             throw new RangeError('Pause can only be "true" or "false".');
@@ -191,10 +124,7 @@ class CosmiPlayer extends stream_1.EventEmitter {
         });
         return this;
     }
-    /**
-     * Plays the first track in the queue
-     * @returns {Promise<CosmiPlayer>}
-     */
+    /** Plays the next track in the queue. */
     async play() {
         if (this.state !== interfaces_1.PlayerState.Connected)
             throw new Error("Player is not connected.");
@@ -215,11 +145,7 @@ class CosmiPlayer extends stream_1.EventEmitter {
         this.queue.current = trackToPlay;
         return this;
     }
-    /**
-     * Sets the voice channel of the player
-     * @param {string} channel - The voice channel id to set
-     * @returns {CosmiPlayer}
-     */
+    /** Sets the voice channel of the player. */
     setVoiceChannel(channel) {
         if (typeof channel !== "string")
             throw new TypeError("Channel must be a non-empty string.");
@@ -227,22 +153,14 @@ class CosmiPlayer extends stream_1.EventEmitter {
         this.connect();
         return this;
     }
-    /**
-     * Sets the text channel of the player
-     * @param {string} channel - The text channel id to set
-     * @returns {CosmiPlayer}
-     */
+    /** Sets the text channel of the player. */
     setTextChannel(channel) {
         if (typeof channel !== "string")
             throw new TypeError("Channel must be a non-empty string.");
         this.textChannel = channel;
         return this;
     }
-    /**
-     * Sets the volume of the player
-     * @param {number} volume - The volume to set
-     * @returns {CosmiPlayer}
-     */
+    /** Sets the volume of the player. */
     setVolume(volume) {
         volume = Number(volume);
         if (isNaN(volume))
@@ -255,22 +173,14 @@ class CosmiPlayer extends stream_1.EventEmitter {
         });
         return this;
     }
-    /**
-     * Sets the loop
-     * @param {boolean} loop - Whether to loop or not
-     * @returns {CosmiPlayer}
-     */
+    /** Sets the loop state of the player. */
     setLoop(loop) {
         if (typeof loop !== "boolean")
             throw new TypeError('Repeat can only be "true" or "false".');
         this.loop = loop;
         return this;
     }
-    /**
-     * Stops the current track.
-     * @param {number} amount - The amount of tracks to skip.
-     * @returns {CosmiPlayer}
-     */
+    /** Stops the current track, or skips to the next one. */
     stop(amount) {
         if (typeof amount === "number" && amount > 1) {
             if (amount > this.queue.length)
@@ -283,11 +193,7 @@ class CosmiPlayer extends stream_1.EventEmitter {
         });
         return this;
     }
-    /**
-     * Seeks to a position in the current track.
-     * @param {number} position - The position to seek to.
-     * @returns {CosmiPlayer}
-     */
+    /** Seeks to the specified position in the current track. */
     seek(position) {
         if (typeof position !== "number")
             throw new TypeError("Position must be a number.");

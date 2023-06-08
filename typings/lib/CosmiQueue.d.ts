@@ -1,47 +1,19 @@
 import { CosmiTrack } from "./CosmiTrack";
 export declare class CosmiQueue extends Array<CosmiTrack> {
-    /**
-     * The current track.
-     * @type {CosmiTrack}
-     */
+    /** The current track. */
     current?: CosmiTrack;
-    /**
-     * The previous track.
-     * @type {CosmiTrack}
-     */
+    /** The previous track. */
     previous?: CosmiTrack;
-    /**
-     * The duration of the queue.
-     * @returns {number}
-     */
+    /** The duration of the queue. */
     duration(): number;
-    /**
-     * Clears the queue.
-     * @returns {void}
-     */
+    /** Clears the queue. */
     clear(): void;
-    /**
-     * Shuffles the queue.
-     * @returns {void}
-     */
+    /** Shuffles the queue. */
     shuffle(): void;
-    /**
-     * Adds a track (or multiple tracks) to the queue.
-     * @param {CosmiTrack | CosmiTrack[]} tracks - The track(s) to add.
-     * @returns {CosmiQueue}
-     */
+    /** Adds a track to the queue. */
     add(tracks: CosmiTrack | CosmiTrack[]): this;
-    /**
-     * Removes a track
-     * @param {number} position - The position of the track to remove.
-     * @returns {CosmiTrack}
-     */
+    /** Removes the track at the specified position. */
     remove(position: number): CosmiTrack;
-    /**
-     * Removes a range of tracks.
-     * @param {number} start - The start position.
-     * @param {number} end - The end position.
-     * @returns {CosmiTrack[]}
-     */
+    /** Removes the tracks in the specified range. */
     remove(start: number, end: number): CosmiTrack[];
 }

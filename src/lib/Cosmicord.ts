@@ -27,28 +27,16 @@ export interface Cosmicord {
 }
 
 export class Cosmicord extends EventEmitter {
-  /**
-   * The nodes for the cosmicord client.
-   * @type {CosmiNode[]}
-   */
+  /** The nodes for the cosmicord client. */
   public nodes: CosmiNode[] = [];
 
-  /**
-   * The client id
-   * @type {string}
-   */
+  /** The client id */
   public clientId?: string;
 
-  /**
-   * The players for the cosmicord client.
-   * @type {Collection<string, CosmiPlayer>}
-   */
+  /** The players for the cosmicord client. */
   public players: Collection<string, CosmiPlayer> = new Collection();
 
-  /**
-   * Creates a new cosmicord client.
-   * @param {CosmiOptions} options The options for the cosmicord client.
-   */
+  /** The constructor for the cosmicord client. */
   constructor(public options: CosmiOptions) {
     super();
 
@@ -60,11 +48,7 @@ export class Cosmicord extends EventEmitter {
     }
   }
 
-  /**
-   * Initializes the cosmicord client.
-   * @param {string} clientId - The client id.
-   * @returns {Promise<void>}
-   */
+  /** Initializes the cosmicord client. */
   public async init(clientId?: string) {
     if (!this.nodes.length || this.nodes.length < 1)
       throw new Error("No nodes were provided.");
@@ -77,12 +61,7 @@ export class Cosmicord extends EventEmitter {
     }
   }
 
-  /**
-   * Searches a track.
-   * @param {CosmiSearchQuery} query - The query to search for.
-   * @param {string} requesterId - The requester id.
-   * @returns {Promise<CosmiLoadedTracks>}
-   */
+  /** Searches for tracks. */
   public async search(query: CosmiSearchQuery, requesterId?: string) {
     const node = this.getLeastUsedNode();
     if (!node) throw new Error("No nodes were found.");
@@ -114,32 +93,19 @@ export class Cosmicord extends EventEmitter {
     return cosmiTracks;
   }
 
-  /**
-   * Creates a new node.
-   * @param {CosmiNodeOptions} options - The options for the node.
-   * @returns {CosmiNode}
-   */
+  /** Creates a new node. */
   public createNode(options: CosmiNodeOptions) {
     const node = new CosmiNode(this, options);
     this.nodes.push(node);
     return node;
   }
 
-  /**
-   * Destroys a node.
-   * @param {CosmiNode} node - The node to destroy.
-   * @returns {void}
-   */
+  /** Destroys a node. */
   public destoryNode(node: CosmiNode) {
     node.destroy();
   }
 
-  /**
-   * Creates a new player.
-   * @param {CosmiPlayerOptions} options - The options for the player.
-   * @param {CosmiNode} node - The node to create the player on.
-   * @returns {CosmiPlayer}
-   */
+  /** Creates a new player. */
   public createPlayer(
     options: CosmiPlayerOptions,
     node: CosmiNode = this.getLeastUsedNode()
@@ -158,11 +124,7 @@ export class Cosmicord extends EventEmitter {
     return player;
   }
 
-  /**
-   * Destroys a player.
-   * @param {string} guildId - The guild id of the player.
-   * @returns {void}
-   */
+  /** Destroys a player. */
   public destroyPlayer(guildId: string) {
     const player = this.players.get(guildId);
     if (!player)
@@ -171,10 +133,7 @@ export class Cosmicord extends EventEmitter {
     player.destroy();
   }
 
-  /**
-   * Get the least used node.
-   * @returns {CosmiNode}
-   */
+  /** Gets a player. */
   public getLeastUsedNode() {
     return this.nodes.reduce((prev, curr) => {
       if (prev.stats.players > curr.stats.players) return curr;
@@ -182,11 +141,7 @@ export class Cosmicord extends EventEmitter {
     });
   }
 
-  /**
-   * Updates the voice state from a discord voice packet.
-   * @param {VoicePacket | VoiceServer | VoiceState} data - The data to update the voice state with.
-   * @returns {Promise<void>}
-   */
+  /** Gets a player. */
   public async updateVoiceState(data: VoicePacket | VoiceServer | VoiceState) {
     if (
       "t" in data &&

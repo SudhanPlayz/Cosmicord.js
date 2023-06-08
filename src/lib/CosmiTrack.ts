@@ -1,86 +1,48 @@
 import { RestTrack } from "../interfaces";
 
 export class CosmiTrack {
-  /**
-   * The track duration in milliseconds
-   * @type {number}
-   */
+  /** The duration of the track. */
   public duration: number;
 
-  /**
-   * The requester ID
-   * @type {string}
-   */
+  /** The requester ID of the track. */
   public requesterId?: string;
 
-  /**
-   * The encoded track
-   * @type {string}
-   */
+  /** The encoded track. */
   public encoded?: string;
 
-  /**
-   * The track identifier
-   * @type {string}
-   */
+  /** The track identifier. */
   public identifier: string;
 
-  /**
-   * Whether the track is seekable or not
-   * @type {boolean}
-   */
+  /** Whether the track is seekable. */
   public isSeekable: boolean;
 
-  /**
-   * The track author
-   * @type {string}
-   */
+  /** The author of the track. */
   public author: string;
 
-  /**
-   * The track length
-   * @type {number}
-   */
+  /** The length of the track. */
   public length: number;
 
-  /**
-   * Whether the track is a stream or not
-   * @type {boolean}
-   */
+  /** Whether the track is a stream or not. */
   public isStream: boolean;
 
-  /**
-   * The track position
-   * @type {number}
-   */
+  /** The position of the track. */
   public position: number;
 
-  /**
-   * The track title
-   * @type {string}
-   */
+  /** The title of the track. */
   public title: string;
 
-  /**
-   * The track source name
-   * @type {string}
-   */
+  /** The source name of the track. */
   public sourceName: string;
 
-  /**
-   * The track uri
-   * @type {string}
-   */
+  /** The uri of the track. */
   public uri?: string;
 
-  /**
-   * The track thumbnail
-   * @returns {string}
-   */
+  /** The thumbnail of the track. */
   public get thumbnail(): string {
     return `https://img.youtube.com/vi/${this.identifier}/mqdefault.jpg`;
   }
 
+  /** Creates a new track. */
   constructor(data: RestTrack, requesterId?: string) {
     this.duration = data.info.length;
     this.encoded = data.encoded;
@@ -96,11 +58,7 @@ export class CosmiTrack {
     this.requesterId = requesterId;
   }
 
-  /**
-   * Displays the thumbnail of the track.
-   * @param {"default" | "mqdefault" | "hqdefault" | "sddefault" | "maxresdefault"} size - The size of the thumbnail.
-   * @returns {string}
-   */
+  /** Returns the thumbnail of the track. */
   public displayThumbnail(
     size:
       | "default"
