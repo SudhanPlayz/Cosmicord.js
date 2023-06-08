@@ -33,7 +33,7 @@ const cosmicord = new Cosmicord({
 });
 ```
 
-Initialize the Cosmicord client when the discord client is ready
+### Initialize the Cosmicord client when the discord client is ready
 
 ```ts
 // ...
@@ -46,7 +46,7 @@ client.on("ready", () => {
 });
 ```
 
-Send the voice server update and voice state update to Cosmicord
+### Send the voice server update and voice state update to Cosmicord
 
 ```ts
 // ...
@@ -55,7 +55,7 @@ client.on("raw", (packet) => {
 });
 ```
 
-How to play a track
+## How to play a track
 
 ```ts
 import { RestLoadResultType } from "cosmicord.js";
@@ -89,5 +89,5 @@ const player = cosmicord.createPlayer({
 player.queue.add(res.tracks[0]);
 
 // Play the track
-await player.play();
+if (!player.playing && !player.queue.current) await player.play()
 ```
