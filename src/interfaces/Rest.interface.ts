@@ -128,21 +128,58 @@ export interface RestSessionInfo {
 }
 
 export interface RestVersion {
+  /**
+   * The semver version of the library
+   */
   semver: string;
-  majaor: number;
+
+  /**
+   * The major version of the library
+   */
+  major: number;
+
+  /**
+   * The minor version of the library
+   */
   minor: number;
+
+  /**
+   * The patch version of the library
+   */ 
   patch: number;
+
+  /**
+   * The pre-release version of the library
+   */ 
   preRelease?: string;
 }
 
 export interface RestGit {
+  /**
+   * The branch of the library
+   */
   branch: string;
+
+  /**
+   * The commit hash of the library
+   */ 
   commit: string;
+  
+  /**
+   * The commit time of the library
+   */
   commitTime: number;
 }
 
 export interface RestPlugin {
+  /**
+   * The name of the plugin
+   */
   name: string;
+
+  /**
+   * The version of the plugin
+   */ 
   version: string;
 }
 
@@ -172,10 +209,19 @@ export interface RestInfo {
    */
   lavaplayer: string;
 
+  /**
+   * Source managers being used by this server
+   */ 
   sourceManagers: string[];
 
+  /**
+   * Filters being used by this server
+   */ 
   filters: string[];
 
+  /**
+   * The plugins being used by this server
+   */ 
   plugins: RestPlugin[];
 }
 

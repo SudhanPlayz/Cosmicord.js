@@ -47,6 +47,7 @@ client.on("ready", () => {
 ```
 
 Send the voice server update and voice state update to Cosmicord
+If you don't send these events, Cosmicord won't be able to play music
 
 ```ts
 // ...
@@ -80,14 +81,14 @@ if (res.loadType === RestLoadResultType.LoadFailed) {
 // Create the player
 const player = cosmicord.createPlayer({
   guildId: "guild id",
-  voiceChannelId: "voice channel id",
-  textChannelId: "text channel id",
-  selfDeaf: true,
+  voiceChannel: "voice channel id",
+  textChannel: "text channel id",
+  selfDeafen: true,
 });
 
 // Add the track to the queue
 player.queue.add(res.tracks[0]);
 
 // Play the track
-await player.play();
+if (!player.playing) await player.play();
 ```

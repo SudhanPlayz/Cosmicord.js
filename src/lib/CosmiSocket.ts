@@ -109,7 +109,7 @@ export class CosmiSocket extends WebSocket {
         break;
 
       default:
-        console.log("Unknown event:", payload);
+        this.manager.emit("debug", `Unknown event\n${payload}`);
         break;
     }
   }
@@ -173,6 +173,13 @@ export class CosmiSocket extends WebSocket {
     if (player.queue.length > 0) {
       player.queue.current = null;
       player.play();
+    } else {
+      player.playing = false;
+      player.paused = false;
+      player.queue.current = null;
+
+      this.manager.emit("queueEnd", player);
+      player.destroy();
     }
   }
 
