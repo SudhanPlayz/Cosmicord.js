@@ -14,6 +14,7 @@ export interface CosmiEvents {
     trackEnd: [CosmiPlayer, CosmiTrack, string];
     trackError: [CosmiPlayer, Error];
     trackStruck: [CosmiPlayer, TrackStuckEventPayload];
+    queueEnd: [CosmiPlayer];
 }
 export interface VoiceState {
     op: "voiceUpdate";
