@@ -2,7 +2,7 @@
     "meta": {
         "version": "0.4.0",
         "format": 20,
-        "date": 1686295194101
+        "date": 1686325227578
     },
     "custom": {
         "general": {
@@ -3078,12 +3078,12 @@
                 "name": "constructor",
                 "params": [
                     {
-                        "name": "arrayLength",
+                        "name": "player",
                         "optional": false,
                         "type": [
                             [
                                 [
-                                    "number"
+                                    "CosmiPlayer"
                                 ]
                             ]
                         ]
@@ -3097,9 +3097,9 @@
                     ]
                 ],
                 "meta": {
-                    "line": 1486,
-                    "file": "lib.es5.d.ts",
-                    "path": "node_modules/typescript/lib"
+                    "line": 11,
+                    "file": "CosmiQueue.ts",
+                    "path": "src/lib"
                 }
             },
             "props": [
@@ -3149,7 +3149,7 @@
                         ]
                     ],
                     "meta": {
-                        "line": 5,
+                        "line": 6,
                         "file": "CosmiQueue.ts",
                         "path": "src/lib"
                     }
@@ -3170,6 +3170,21 @@
                     }
                 },
                 {
+                    "name": "player",
+                    "type": [
+                        [
+                            [
+                                "CosmiPlayer"
+                            ]
+                        ]
+                    ],
+                    "meta": {
+                        "line": 11,
+                        "file": "CosmiQueue.ts",
+                        "path": "src/lib"
+                    }
+                },
+                {
                     "name": "previous",
                     "type": [
                         [
@@ -3179,7 +3194,7 @@
                         ]
                     ],
                     "meta": {
-                        "line": 8,
+                        "line": 9,
                         "file": "CosmiQueue.ts",
                         "path": "src/lib"
                     }
@@ -3255,7 +3270,7 @@
                         ]
                     ],
                     "meta": {
-                        "line": 29,
+                        "line": 34,
                         "file": "CosmiQueue.ts",
                         "path": "src/lib"
                     }
@@ -3298,7 +3313,7 @@
                         ]
                     ],
                     "meta": {
-                        "line": 19,
+                        "line": 24,
                         "file": "CosmiQueue.ts",
                         "path": "src/lib"
                     }
@@ -3406,7 +3421,7 @@
                         ]
                     ],
                     "meta": {
-                        "line": 11,
+                        "line": 16,
                         "file": "CosmiQueue.ts",
                         "path": "src/lib"
                     }
@@ -4471,7 +4486,7 @@
                         ]
                     ],
                     "meta": {
-                        "line": 50,
+                        "line": 57,
                         "file": "CosmiQueue.ts",
                         "path": "src/lib"
                     }
@@ -4521,7 +4536,7 @@
                         ]
                     ],
                     "meta": {
-                        "line": 24,
+                        "line": 29,
                         "file": "CosmiQueue.ts",
                         "path": "src/lib"
                     }
@@ -4938,7 +4953,7 @@
                 }
             ],
             "meta": {
-                "line": 3,
+                "line": 4,
                 "file": "CosmiQueue.ts",
                 "path": "src/lib"
             }
@@ -7720,7 +7735,7 @@
                         ]
                     ],
                     "meta": {
-                        "line": 187,
+                        "line": 188,
                         "file": "CosmiSocket.ts",
                         "path": "src/lib"
                     }
@@ -7776,7 +7791,7 @@
                         ]
                     ],
                     "meta": {
-                        "line": 195,
+                        "line": 196,
                         "file": "CosmiSocket.ts",
                         "path": "src/lib"
                     }
@@ -10090,6 +10105,33 @@
                     ]
                 },
                 {
+                    "name": "trackAdded",
+                    "optional": false,
+                    "type": [
+                        [
+                            [
+                                "["
+                            ],
+                            [
+                                "CosmiPlayer",
+                                ", "
+                            ],
+                            [
+                                "CosmiTrack",
+                                " | "
+                            ],
+                            [
+                                "Array",
+                                "<"
+                            ],
+                            [
+                                "CosmiTrack",
+                                ">]"
+                            ]
+                        ]
+                    ]
+                },
+                {
                     "name": "trackEnd",
                     "optional": false,
                     "type": [
@@ -10127,6 +10169,33 @@
                             [
                                 "Error",
                                 "]"
+                            ]
+                        ]
+                    ]
+                },
+                {
+                    "name": "trackRemoved",
+                    "optional": false,
+                    "type": [
+                        [
+                            [
+                                "["
+                            ],
+                            [
+                                "CosmiPlayer",
+                                ", "
+                            ],
+                            [
+                                "CosmiTrack",
+                                " | "
+                            ],
+                            [
+                                "Array",
+                                "<"
+                            ],
+                            [
+                                "CosmiTrack",
+                                ">]"
                             ]
                         ]
                     ]
@@ -10174,7 +10243,7 @@
         {
             "name": "CosmiLoadedTracks",
             "meta": {
-                "line": 99,
+                "line": 160,
                 "file": "Cosmicord.interface.ts",
                 "path": "src/interfaces"
             },
@@ -10331,7 +10400,7 @@
         {
             "name": "CosmiOptions",
             "meta": {
-                "line": 67,
+                "line": 128,
                 "file": "Cosmicord.interface.ts",
                 "path": "src/interfaces"
             },
@@ -10485,7 +10554,7 @@
         {
             "name": "CosmiSearchQuery",
             "meta": {
-                "line": 87,
+                "line": 148,
                 "file": "Cosmicord.interface.ts",
                 "path": "src/interfaces"
             },
@@ -10517,7 +10586,7 @@
         {
             "name": "DiscordVoicePayload",
             "meta": {
-                "line": 57,
+                "line": 118,
                 "file": "Cosmicord.interface.ts",
                 "path": "src/interfaces"
             },
@@ -13204,7 +13273,7 @@
         {
             "name": "VoicePacket",
             "meta": {
-                "line": 52,
+                "line": 113,
                 "file": "Cosmicord.interface.ts",
                 "path": "src/interfaces"
             },
@@ -13260,7 +13329,7 @@
         {
             "name": "VoiceServer",
             "meta": {
-                "line": 39,
+                "line": 100,
                 "file": "Cosmicord.interface.ts",
                 "path": "src/interfaces"
             },
@@ -13303,7 +13372,7 @@
         {
             "name": "VoiceState",
             "meta": {
-                "line": 32,
+                "line": 93,
                 "file": "Cosmicord.interface.ts",
                 "path": "src/interfaces"
             },

@@ -9,4 +9,4 @@ var PlayerState;
     PlayerState["Disconnecting"] = "DISCONNECTING";
     PlayerState["Destroying"] = "DESTROYING";
     PlayerState["Destroyed"] = "DESTROYED";
-})(PlayerState || (exports.PlayerState = PlayerState = {}));
+})(PlayerState = exports.PlayerState || (exports.PlayerState = {}));
