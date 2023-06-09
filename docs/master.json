@@ -2,7 +2,7 @@
     "meta": {
         "version": "0.4.0",
         "format": 20,
-        "date": 1686241281540
+        "date": 1686295194101
     },
     "custom": {
         "general": {
@@ -17,7 +17,7 @@
                 "get-started": {
                     "name": "Get Started",
                     "type": "md",
-                    "content": "# Get Started\n\nDownload the latest Lavalink binary from their [GitHub](https://github.com/lavalink-devs/Lavalink/releases) and run it. You can find more information about Lavalink [here](https://github.com/lavalink-devs/Lavalink)\n\n# Example\n\nCreate the discord client and Cosmicord client\n\n```ts\n// Import the required classes\nimport { Cosmicord } from \"cosmicord.js\";\nimport { Client } from \"discord.js\";\n\n// Create the discord client\nconst client = new Client({\n  intents: [\"Guilds\", \"GuildVoiceStates\"],\n});\n\n// Create the Cosmicord client\nconst cosmicord = new Cosmicord({\n  nodes: [\n    {\n      host: \"localhost\",\n      port: 2333,\n      password: \"youshallnotpass\",\n      identifier: \"Main-Node\",\n    },\n  ],\n  send: (id, payload) => {\n    const guild = client.guilds.cache.get(id);\n    if (guild) guild.shard.send(payload);\n  },\n});\n```\n\n### Initialize the Cosmicord client when the discord client is ready\n\n```ts\n// ...\nclient.on(\"ready\", () => {\n  // Log to the console that the client is ready\n  console.log(\"Client is ready!\");\n\n  // Initialize the Cosmicord client\n  cosmicord.init(client.user.id);\n});\n```\n\n### Send the voice server update and voice state update to Cosmicord\n\n```ts\n// ...\nclient.on(\"raw\", (packet) => {\n  cosmicord.updateVoiceState(packet);\n});\n```\n\n## How to play a track\n\n```ts\nimport { RestLoadResultType } from \"cosmicord.js\";\n\n// Search for a track\nconst res = await cosmicord.search(\n  {\n    query: \"Never Gonna Give You Up\",\n  },\n  \"requester id\"\n);\n\n// Check if the search was successful\nif (res.loadType === RestLoadResultType.LoadFailed) {\n  return console.log(\"Failed to load track\");\n} else if (res.loadType === RestLoadResultType.NoMatches) {\n  return console.log(\"No matches found\");\n} else if (res.loadType === RestLoadResultType.PlaylistLoaded) {\n  return console.log(\"Playlist loaded\");\n}\n\n// Create the player\nconst player = cosmicord.createPlayer({\n  guildId: \"guild id\",\n  voiceChannelId: \"voice channel id\",\n  textChannelId: \"text channel id\",\n  selfDeaf: true,\n});\n\n// Add the track to the queue\nplayer.queue.add(res.tracks[0]);\n\n// Play the track\nif (!player.playing && !player.queue.current) await player.play()\n```\n",
+                    "content": "# Get Started\n\nDownload the latest Lavalink binary from their [GitHub](https://github.com/lavalink-devs/Lavalink/releases) and run it. You can find more information about Lavalink [here](https://github.com/lavalink-devs/Lavalink)\n\n# Example\n\nCreate the discord client and Cosmicord client\n\n```ts\n// Import the required classes\nimport { Cosmicord } from \"cosmicord.js\";\nimport { Client } from \"discord.js\";\n\n// Create the discord client\nconst client = new Client({\n  intents: [\"Guilds\", \"GuildVoiceStates\"],\n});\n\n// Create the Cosmicord client\nconst cosmicord = new Cosmicord({\n  nodes: [\n    {\n      host: \"localhost\",\n      port: 2333,\n      password: \"youshallnotpass\",\n      identifier: \"Main-Node\",\n    },\n  ],\n  send: (id, payload) => {\n    const guild = client.guilds.cache.get(id);\n    if (guild) guild.shard.send(payload);\n  },\n});\n```\n\n### Initialize the Cosmicord client when the discord client is ready\n\n```ts\n// ...\nclient.on(\"ready\", () => {\n  // Log to the console that the client is ready\n  console.log(\"Client is ready!\");\n\n  // Initialize the Cosmicord client\n  cosmicord.init(client.user.id);\n});\n```\n\nSend the voice server update and voice state update to Cosmicord\nIf you don't send these events, Cosmicord won't be able to play music\n\n```ts\n// ...\nclient.on(\"raw\", (packet) => {\n  cosmicord.updateVoiceState(packet);\n});\n```\n\n## How to play a track\n\n```ts\nimport { RestLoadResultType } from \"cosmicord.js\";\n\n// Search for a track\nconst res = await cosmicord.search(\n  {\n    query: \"Never Gonna Give You Up\",\n  },\n  \"requester id\"\n);\n\n// Check if the search was successful\nif (res.loadType === RestLoadResultType.LoadFailed) {\n  return console.log(\"Failed to load track\");\n} else if (res.loadType === RestLoadResultType.NoMatches) {\n  return console.log(\"No matches found\");\n} else if (res.loadType === RestLoadResultType.PlaylistLoaded) {\n  return console.log(\"Playlist loaded\");\n}\n\n// Create the player\nconst player = cosmicord.createPlayer({\n  guildId: \"guild id\",\n  voiceChannel: \"voice channel id\",\n  textChannel: \"text channel id\",\n  selfDeafen: true,\n});\n\n// Add the track to the queue\nplayer.queue.add(res.tracks[0]);\n\n// Play the track\nawait player.play();\n```\n",
                     "path": "docs/general/Get Started.md"
                 }
             }
@@ -7720,7 +7720,7 @@
                         ]
                     ],
                     "meta": {
-                        "line": 180,
+                        "line": 187,
                         "file": "CosmiSocket.ts",
                         "path": "src/lib"
                     }
@@ -7776,7 +7776,7 @@
                         ]
                     ],
                     "meta": {
-                        "line": 188,
+                        "line": 195,
                         "file": "CosmiSocket.ts",
                         "path": "src/lib"
                     }
@@ -9745,7 +9745,7 @@
         {
             "name": "RestLoadResultType",
             "meta": {
-                "line": 182,
+                "line": 228,
                 "file": "Rest.interface.ts",
                 "path": "src/interfaces"
             },
@@ -9852,7 +9852,7 @@
         {
             "name": "ChannelMix",
             "meta": {
-                "line": 472,
+                "line": 518,
                 "file": "Rest.interface.ts",
                 "path": "src/interfaces"
             },
@@ -10075,6 +10075,21 @@
                     ]
                 },
                 {
+                    "name": "queueEnd",
+                    "optional": false,
+                    "type": [
+                        [
+                            [
+                                "["
+                            ],
+                            [
+                                "CosmiPlayer",
+                                "]"
+                            ]
+                        ]
+                    ]
+                },
+                {
                     "name": "trackEnd",
                     "optional": false,
                     "type": [
@@ -10159,7 +10174,7 @@
         {
             "name": "CosmiLoadedTracks",
             "meta": {
-                "line": 97,
+                "line": 99,
                 "file": "Cosmicord.interface.ts",
                 "path": "src/interfaces"
             },
@@ -10316,7 +10331,7 @@
         {
             "name": "CosmiOptions",
             "meta": {
-                "line": 65,
+                "line": 67,
                 "file": "Cosmicord.interface.ts",
                 "path": "src/interfaces"
             },
@@ -10470,7 +10485,7 @@
         {
             "name": "CosmiSearchQuery",
             "meta": {
-                "line": 85,
+                "line": 87,
                 "file": "Cosmicord.interface.ts",
                 "path": "src/interfaces"
             },
@@ -10502,7 +10517,7 @@
         {
             "name": "DiscordVoicePayload",
             "meta": {
-                "line": 55,
+                "line": 57,
                 "file": "Cosmicord.interface.ts",
                 "path": "src/interfaces"
             },
@@ -10582,7 +10597,7 @@
         {
             "name": "Distortion",
             "meta": {
-                "line": 445,
+                "line": 491,
                 "file": "Rest.interface.ts",
                 "path": "src/interfaces"
             },
@@ -10680,7 +10695,7 @@
         {
             "name": "Equalizer",
             "meta": {
-                "line": 385,
+                "line": 431,
                 "file": "Rest.interface.ts",
                 "path": "src/interfaces"
             },
@@ -10755,7 +10770,7 @@
         {
             "name": "Filters",
             "meta": {
-                "line": 493,
+                "line": 539,
                 "file": "Rest.interface.ts",
                 "path": "src/interfaces"
             },
@@ -10880,7 +10895,7 @@
         {
             "name": "Karaoke",
             "meta": {
-                "line": 394,
+                "line": 440,
                 "file": "Rest.interface.ts",
                 "path": "src/interfaces"
             },
@@ -10934,7 +10949,7 @@
         {
             "name": "LowPass",
             "meta": {
-                "line": 487,
+                "line": 533,
                 "file": "Rest.interface.ts",
                 "path": "src/interfaces"
             },
@@ -11382,7 +11397,7 @@
         {
             "name": "RestGit",
             "meta": {
-                "line": 138,
+                "line": 157,
                 "file": "Rest.interface.ts",
                 "path": "src/interfaces"
             },
@@ -11425,7 +11440,7 @@
         {
             "name": "RestInfo",
             "meta": {
-                "line": 149,
+                "line": 186,
                 "file": "Rest.interface.ts",
                 "path": "src/interfaces"
             },
@@ -11694,7 +11709,7 @@
         {
             "name": "RestPlayer",
             "meta": {
-                "line": 224,
+                "line": 270,
                 "file": "Rest.interface.ts",
                 "path": "src/interfaces"
             },
@@ -11770,7 +11785,7 @@
         {
             "name": "RestPlayerUpdate",
             "meta": {
-                "line": 256,
+                "line": 302,
                 "file": "Rest.interface.ts",
                 "path": "src/interfaces"
             },
@@ -11868,7 +11883,7 @@
         {
             "name": "RestPlaylistInfo",
             "meta": {
-                "line": 190,
+                "line": 236,
                 "file": "Rest.interface.ts",
                 "path": "src/interfaces"
             },
@@ -11900,7 +11915,7 @@
         {
             "name": "RestPlugin",
             "meta": {
-                "line": 144,
+                "line": 174,
                 "file": "Rest.interface.ts",
                 "path": "src/interfaces"
             },
@@ -11964,7 +11979,7 @@
         {
             "name": "RestTrack",
             "meta": {
-                "line": 326,
+                "line": 372,
                 "file": "Rest.interface.ts",
                 "path": "src/interfaces"
             },
@@ -12007,7 +12022,7 @@
         {
             "name": "RestTrackDecode",
             "meta": {
-                "line": 372,
+                "line": 418,
                 "file": "Rest.interface.ts",
                 "path": "src/interfaces"
             },
@@ -12039,7 +12054,7 @@
         {
             "name": "RestTrackInfo",
             "meta": {
-                "line": 340,
+                "line": 386,
                 "file": "Rest.interface.ts",
                 "path": "src/interfaces"
             },
@@ -12148,7 +12163,7 @@
         {
             "name": "RestTrackLoadResult",
             "meta": {
-                "line": 202,
+                "line": 248,
                 "file": "Rest.interface.ts",
                 "path": "src/interfaces"
             },
@@ -12213,7 +12228,7 @@
             },
             "props": [
                 {
-                    "name": "majaor",
+                    "name": "major",
                     "optional": false,
                     "type": [
                         [
@@ -12272,7 +12287,7 @@
         {
             "name": "RestVoiceState",
             "meta": {
-                "line": 298,
+                "line": 344,
                 "file": "Rest.interface.ts",
                 "path": "src/interfaces"
             },
@@ -12337,7 +12352,7 @@
         {
             "name": "Rotation",
             "meta": {
-                "line": 439,
+                "line": 485,
                 "file": "Rest.interface.ts",
                 "path": "src/interfaces"
             },
@@ -12659,7 +12674,7 @@
         {
             "name": "Timescale",
             "meta": {
-                "line": 409,
+                "line": 455,
                 "file": "Rest.interface.ts",
                 "path": "src/interfaces"
             },
@@ -13125,7 +13140,7 @@
         {
             "name": "Tremolo",
             "meta": {
-                "line": 421,
+                "line": 467,
                 "file": "Rest.interface.ts",
                 "path": "src/interfaces"
             },
@@ -13157,7 +13172,7 @@
         {
             "name": "Vibrato",
             "meta": {
-                "line": 430,
+                "line": 476,
                 "file": "Rest.interface.ts",
                 "path": "src/interfaces"
             },
@@ -13189,7 +13204,7 @@
         {
             "name": "VoicePacket",
             "meta": {
-                "line": 50,
+                "line": 52,
                 "file": "Cosmicord.interface.ts",
                 "path": "src/interfaces"
             },
@@ -13245,7 +13260,7 @@
         {
             "name": "VoiceServer",
             "meta": {
-                "line": 37,
+                "line": 39,
                 "file": "Cosmicord.interface.ts",
                 "path": "src/interfaces"
             },
@@ -13288,7 +13303,7 @@
         {
             "name": "VoiceState",
             "meta": {
-                "line": 30,
+                "line": 32,
                 "file": "Cosmicord.interface.ts",
                 "path": "src/interfaces"
             },
