@@ -17,7 +17,7 @@ export class CosmiPlayer extends EventEmitter {
   public playing: boolean = false;
 
   /** Queue for the player. */
-  public queue = new CosmiQueue();
+  public queue = new CosmiQueue(this);
 
   /** Position of the current track. */
   public position: number = 0;

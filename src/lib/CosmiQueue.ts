@@ -1,3 +1,4 @@
+import { CosmiPlayer } from "./CosmiPlayer";
 import { CosmiTrack } from "./CosmiTrack";
 
 export class CosmiQueue extends Array<CosmiTrack> {
@@ -6,6 +7,10 @@ export class CosmiQueue extends Array<CosmiTrack> {
 
   /** The previous track. */
   public previous?: CosmiTrack;
+
+  constructor(public player: CosmiPlayer) {
+    super();
+  }
 
   /** The duration of the queue. */
   public duration() {
@@ -27,6 +32,8 @@ export class CosmiQueue extends Array<CosmiTrack> {
 
   /** Adds a track to the queue. */
   public add(tracks: CosmiTrack | CosmiTrack[]) {
+    this.player.node.manager.emit("trackAdded", this.player, tracks);
+
     if (!this.current) {
       if (Array.isArray(tracks)) {
         this.current = tracks[0];
@@ -78,6 +85,9 @@ export class CosmiQueue extends Array<CosmiTrack> {
 
     const tracks = this.slice(startOrPosition, end);
     this.splice(startOrPosition, end - startOrPosition);
+
+    this.player.node.manager.emit("trackRemoved", this.player, tracks);
+
     return tracks;
   }
 }

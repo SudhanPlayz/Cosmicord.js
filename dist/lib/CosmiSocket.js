@@ -75,7 +75,7 @@ class CosmiSocket extends ws_1.default {
                 this.trackStuck(payload);
                 break;
             default:
-                console.log("Unknown event:", payload);
+                this.manager.emit("debug", `Unknown event\n${payload}`);
                 break;
         }
     }
@@ -130,6 +130,14 @@ class CosmiSocket extends ws_1.default {
         if (player.queue.length > 0) {
             player.queue.current = null;
             player.play();
+        }
+        else {
+            player.playing = false;
+            player.paused = false;
+            player.queue.current = null;
+            player.queue.clear();
+            this.manager.emit("queueEnd", player);
+            player.destroy();
         }
     }
     /** Emits when a track errors */

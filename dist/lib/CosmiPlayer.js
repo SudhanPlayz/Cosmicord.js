@@ -16,7 +16,7 @@ class CosmiPlayer extends stream_1.EventEmitter {
     /** Whether the player is playing or not. */
     playing = false;
     /** Queue for the player. */
-    queue = new _1.CosmiQueue();
+    queue = new _1.CosmiQueue(this);
     /** Position of the current track. */
     position = 0;
     /** Voice State of the player. */

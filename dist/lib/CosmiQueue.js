@@ -2,10 +2,15 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CosmiQueue = void 0;
 class CosmiQueue extends Array {
+    player;
     /** The current track. */
     current;
     /** The previous track. */
     previous;
+    constructor(player) {
+        super();
+        this.player = player;
+    }
     /** The duration of the queue. */
     duration() {
         return this.reduce((acc, cur) => acc + cur.duration, this.current?.duration || 0);
@@ -20,6 +25,7 @@ class CosmiQueue extends Array {
     }
     /** Adds a track to the queue. */
     add(tracks) {
+        this.player.node.manager.emit("trackAdded", this.player, tracks);
         if (!this.current) {
             if (Array.isArray(tracks)) {
                 this.current = tracks[0];
@@ -52,6 +58,7 @@ class CosmiQueue extends Array {
         }
         const tracks = this.slice(startOrPosition, end);
         this.splice(startOrPosition, end - startOrPosition);
+        this.player.node.manager.emit("trackRemoved", this.player, tracks);
         return tracks;
     }
 }

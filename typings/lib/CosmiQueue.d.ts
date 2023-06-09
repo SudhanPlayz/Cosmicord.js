@@ -1,9 +1,12 @@
+import { CosmiPlayer } from "./CosmiPlayer";
 import { CosmiTrack } from "./CosmiTrack";
 export declare class CosmiQueue extends Array<CosmiTrack> {
+    player: CosmiPlayer;
     /** The current track. */
     current?: CosmiTrack;
     /** The previous track. */
     previous?: CosmiTrack;
+    constructor(player: CosmiPlayer);
     /** The duration of the queue. */
     duration(): number;
     /** Clears the queue. */
