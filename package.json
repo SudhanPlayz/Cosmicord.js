@@ -1,6 +1,6 @@
 {
   "name": "cosmicord.js",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Cosmicord.js is a powerful and intuitive Lavalink wrapper designed to simplify the process of integrating Lavalink into your Node.js applications.",
   "main": "dist",
   "repository": {
