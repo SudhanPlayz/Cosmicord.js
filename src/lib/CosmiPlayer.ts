@@ -2,6 +2,7 @@ import { EventEmitter } from "stream";
 import { CosmiNode, CosmiQueue } from ".";
 import { CosmiPlayerOptions, Filters, VoiceState } from "../interfaces";
 import { PlayerState } from "../interfaces";
+import { Collection } from "discord.js";
 
 export class CosmiPlayer extends EventEmitter {
   /** The guild id of the player. */
@@ -48,6 +49,9 @@ export class CosmiPlayer extends EventEmitter {
 
   /** Filters for the player. */
   public filters?: Filters;
+
+  /** Custom metadata */
+  public metadata = new Collection<string, any>();
 
   /** Creates a new player */
   constructor(public node: CosmiNode, public options: CosmiPlayerOptions) {
@@ -253,5 +257,16 @@ export class CosmiPlayer extends EventEmitter {
     this.position = position;
 
     return this;
+  }
+
+  /** Set a value to a key */
+  public set(key: string, value: any) {
+    this.metadata.set(key, value);
+    return this;
+  }
+
+  /** Get a value from a key */
+  public get<T>(key: string): T {
+    return this.metadata.get(key);
   }
 }
