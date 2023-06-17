@@ -6,7 +6,7 @@ var SearchFrom;
     SearchFrom["YouTube"] = "ytsearch:";
     SearchFrom["SoundCloud"] = "scsearch:";
     SearchFrom["YouTubeMusic"] = "ytmsearch:";
-})(SearchFrom || (exports.SearchFrom = SearchFrom = {}));
+})(SearchFrom = exports.SearchFrom || (exports.SearchFrom = {}));
 var RestSeverity;
 (function (RestSeverity) {
     /**
@@ -21,7 +21,7 @@ var RestSeverity;
      * If the probable cause is an issue with the library or when there is no way to tell what the cause might be. This is the default level and other levels are used in cases where the thrower has more in-depth knowledge about the error
      */
     RestSeverity["Fault"] = "FAULT";
-})(RestSeverity || (exports.RestSeverity = RestSeverity = {}));
+})(RestSeverity = exports.RestSeverity || (exports.RestSeverity = {}));
 var RestLoadResultType;
 (function (RestLoadResultType) {
     RestLoadResultType["TrackLoaded"] = "TRACK_LOADED";
@@ -29,4 +29,4 @@ var RestLoadResultType;
     RestLoadResultType["SearchResults"] = "SEARCH_RESULT";
     RestLoadResultType["NoMatches"] = "NO_MATCHES";
     RestLoadResultType["LoadFailed"] = "LOAD_FAILED";
-})(RestLoadResultType || (exports.RestLoadResultType = RestLoadResultType = {}));
+})(RestLoadResultType = exports.RestLoadResultType || (exports.RestLoadResultType = {}));

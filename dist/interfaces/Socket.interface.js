@@ -6,7 +6,7 @@ var TrackExceptionSeverity;
     TrackExceptionSeverity["Common"] = "COMMON";
     TrackExceptionSeverity["Suspected"] = "SUSPICIOUS";
     TrackExceptionSeverity["Fault"] = "FAULT";
-})(TrackExceptionSeverity || (exports.TrackExceptionSeverity = TrackExceptionSeverity = {}));
+})(TrackExceptionSeverity = exports.TrackExceptionSeverity || (exports.TrackExceptionSeverity = {}));
 var TrackEndReason;
 (function (TrackEndReason) {
     TrackEndReason["Finished"] = "FINISHED";
@@ -14,4 +14,4 @@ var TrackEndReason;
     TrackEndReason["Stopped"] = "STOPPED";
     TrackEndReason["Replaced"] = "REPLACED";
     TrackEndReason["Cleanup"] = "CLEANUP";
-})(TrackEndReason || (exports.TrackEndReason = TrackEndReason = {}));
+})(TrackEndReason = exports.TrackEndReason || (exports.TrackEndReason = {}));

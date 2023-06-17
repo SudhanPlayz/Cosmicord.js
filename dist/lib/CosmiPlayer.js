@@ -4,6 +4,7 @@ exports.CosmiPlayer = void 0;
 const stream_1 = require("stream");
 const _1 = require(".");
 const interfaces_1 = require("../interfaces");
+const discord_js_1 = require("discord.js");
 class CosmiPlayer extends stream_1.EventEmitter {
     node;
     options;
@@ -37,6 +38,8 @@ class CosmiPlayer extends stream_1.EventEmitter {
     state = interfaces_1.PlayerState.Disconnected;
     /** Filters for the player. */
     filters;
+    /** Custom metadata */
+    metadata = new discord_js_1.Collection();
     /** Creates a new player */
     constructor(node, options) {
         super();
@@ -204,6 +207,15 @@ class CosmiPlayer extends stream_1.EventEmitter {
         });
         this.position = position;
         return this;
+    }
+    /** Set a value to a key */
+    set(key, value) {
+        this.metadata.set(key, value);
+        return this;
+    }
+    /** Get a value from a key */
+    get(key) {
+        return this.metadata.get(key);
     }
 }
 exports.CosmiPlayer = CosmiPlayer;

@@ -2,6 +2,7 @@ import { EventEmitter } from "stream";
 import { CosmiNode, CosmiQueue } from ".";
 import { CosmiPlayerOptions, Filters, VoiceState } from "../interfaces";
 import { PlayerState } from "../interfaces";
+import { Collection } from "discord.js";
 export declare class CosmiPlayer extends EventEmitter {
     node: CosmiNode;
     options: CosmiPlayerOptions;
@@ -35,6 +36,8 @@ export declare class CosmiPlayer extends EventEmitter {
     state: PlayerState;
     /** Filters for the player. */
     filters?: Filters;
+    /** Custom metadata */
+    metadata: Collection<string, any>;
     /** Creates a new player */
     constructor(node: CosmiNode, options: CosmiPlayerOptions);
     /** Connects the player to the voice channel. */
@@ -59,4 +62,8 @@ export declare class CosmiPlayer extends EventEmitter {
     stop(amount?: number): this;
     /** Seeks to the specified position in the current track. */
     seek(position: number): this;
+    /** Set a value to a key */
+    set(key: string, value: any): this;
+    /** Get a value from a key */
+    get<T>(key: string): T;
 }
