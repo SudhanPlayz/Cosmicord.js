@@ -172,6 +172,7 @@ export class CosmiPlayer extends EventEmitter {
 
     this.playing = true;
     this.paused = false;
+    this.queue.previous = curTrack;
     this.queue.shift();
     this.queue.current = trackToPlay;
 
