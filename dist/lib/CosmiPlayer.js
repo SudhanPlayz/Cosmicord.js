@@ -144,6 +144,7 @@ class CosmiPlayer extends stream_1.EventEmitter {
         });
         this.playing = true;
         this.paused = false;
+        this.queue.previous = curTrack;
         this.queue.shift();
         this.queue.current = trackToPlay;
         return this;
@@ -206,6 +207,25 @@ class CosmiPlayer extends stream_1.EventEmitter {
             position,
         });
         this.position = position;
+        return this;
+    }
+    /** Add filters to the player */
+    setFilters(filters) {
+        this.filters = filters;
+        this.node.socket.sendData({
+            op: "filters",
+            guildId: this.guildId,
+            ...filters,
+        });
+        return this;
+    }
+    /** Clear filters from the player */
+    clearFilters() {
+        this.filters = null;
+        this.node.socket.sendData({
+            op: "filters",
+            guildId: this.guildId,
+        });
         return this;
     }
     /** Set a value to a key */

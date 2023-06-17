@@ -62,6 +62,10 @@ export declare class CosmiPlayer extends EventEmitter {
     stop(amount?: number): this;
     /** Seeks to the specified position in the current track. */
     seek(position: number): this;
+    /** Add filters to the player */
+    setFilters(filters: Filters): this;
+    /** Clear filters from the player */
+    clearFilters(): this;
     /** Set a value to a key */
     set(key: string, value: any): this;
     /** Get a value from a key */

@@ -2,7 +2,7 @@
     "meta": {
         "version": "0.4.0",
         "format": 20,
-        "date": 1686487574594
+        "date": 1687011915607
     },
     "custom": {
         "general": {
@@ -1935,6 +1935,21 @@
                     }
                 },
                 {
+                    "name": "clearFilters",
+                    "returns": [
+                        [
+                            [
+                                "CosmiPlayer"
+                            ]
+                        ]
+                    ],
+                    "meta": {
+                        "line": 277,
+                        "file": "CosmiPlayer.ts",
+                        "path": "src/lib"
+                    }
+                },
+                {
                     "name": "connect",
                     "returns": [
                         [
@@ -2094,7 +2109,7 @@
                         ]
                     ],
                     "meta": {
-                        "line": 269,
+                        "line": 295,
                         "file": "CosmiPlayer.ts",
                         "path": "src/lib"
                     }
@@ -2671,7 +2686,7 @@
                         ]
                     ],
                     "meta": {
-                        "line": 247,
+                        "line": 248,
                         "file": "CosmiPlayer.ts",
                         "path": "src/lib"
                     }
@@ -2710,7 +2725,35 @@
                         ]
                     ],
                     "meta": {
-                        "line": 263,
+                        "line": 289,
+                        "file": "CosmiPlayer.ts",
+                        "path": "src/lib"
+                    }
+                },
+                {
+                    "name": "setFilters",
+                    "params": [
+                        {
+                            "name": "filters",
+                            "optional": false,
+                            "type": [
+                                [
+                                    [
+                                        "Filters"
+                                    ]
+                                ]
+                            ]
+                        }
+                    ],
+                    "returns": [
+                        [
+                            [
+                                "CosmiPlayer"
+                            ]
+                        ]
+                    ],
+                    "meta": {
+                        "line": 264,
                         "file": "CosmiPlayer.ts",
                         "path": "src/lib"
                     }
@@ -2738,7 +2781,7 @@
                         ]
                     ],
                     "meta": {
-                        "line": 221,
+                        "line": 222,
                         "file": "CosmiPlayer.ts",
                         "path": "src/lib"
                     }
@@ -2794,7 +2837,7 @@
                         ]
                     ],
                     "meta": {
-                        "line": 196,
+                        "line": 197,
                         "file": "CosmiPlayer.ts",
                         "path": "src/lib"
                     }
@@ -2822,7 +2865,7 @@
                         ]
                     ],
                     "meta": {
-                        "line": 186,
+                        "line": 187,
                         "file": "CosmiPlayer.ts",
                         "path": "src/lib"
                     }
@@ -2850,7 +2893,7 @@
                         ]
                     ],
                     "meta": {
-                        "line": 205,
+                        "line": 206,
                         "file": "CosmiPlayer.ts",
                         "path": "src/lib"
                     }
@@ -2878,7 +2921,7 @@
                         ]
                     ],
                     "meta": {
-                        "line": 231,
+                        "line": 232,
                         "file": "CosmiPlayer.ts",
                         "path": "src/lib"
                     }
