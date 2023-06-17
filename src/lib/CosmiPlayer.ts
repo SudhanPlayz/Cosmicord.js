@@ -1,6 +1,6 @@
 import { EventEmitter } from "stream";
 import { CosmiNode, CosmiQueue } from ".";
-import { CosmiPlayerOptions, Filters, VoiceState } from "../interfaces";
+import { CosmiPlayerOptions, Equalizer, Filters, VoiceState } from "../interfaces";
 import { PlayerState } from "../interfaces";
 import { Collection } from "discord.js";
 
@@ -176,6 +176,7 @@ export class CosmiPlayer extends EventEmitter {
 
     this.playing = true;
     this.paused = false;
+    this.queue.previous = curTrack;
     this.queue.shift();
     this.queue.current = trackToPlay;
 
@@ -255,6 +256,31 @@ export class CosmiPlayer extends EventEmitter {
     });
 
     this.position = position;
+
+    return this;
+  }
+
+  /** Add filters to the player */
+  public setFilters(filters: Filters) {
+    this.filters = filters;
+
+    this.node.socket.sendData({
+      op: "filters",
+      guildId: this.guildId,
+      ...filters,
+    });
+
+    return this;
+  }
+
+  /** Clear filters from the player */
+  public clearFilters() {
+    this.filters = null;
+
+    this.node.socket.sendData({
+      op: "filters",
+      guildId: this.guildId,
+    });
 
     return this;
   }

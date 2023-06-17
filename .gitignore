@@ -96,6 +96,9 @@ jspm_packages/
 # DynamoDB Local files
 .dynamodb/
 
+# .idea
+.idea/
+
 # TernJS port file
 .tern-port
 
