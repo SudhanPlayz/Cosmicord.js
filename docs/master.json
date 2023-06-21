@@ -2,7 +2,7 @@
     "meta": {
         "version": "0.4.0",
         "format": 20,
-        "date": 1687012209621
+        "date": 1687356053734
     },
     "custom": {
         "general": {
@@ -7869,7 +7869,7 @@
                         ]
                     ],
                     "meta": {
-                        "line": 188,
+                        "line": 186,
                         "file": "CosmiSocket.ts",
                         "path": "src/lib"
                     }
@@ -7925,7 +7925,7 @@
                         ]
                     ],
                     "meta": {
-                        "line": 196,
+                        "line": 194,
                         "file": "CosmiSocket.ts",
                         "path": "src/lib"
                     }
