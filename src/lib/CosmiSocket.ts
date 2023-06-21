@@ -178,9 +178,7 @@ export class CosmiSocket extends WebSocket {
             player.paused = false;
             player.queue.current = null;
             player.queue.clear();
-
             this.manager.emit("queueEnd", player);
-            player.destroy();
         }
     }
 
