@@ -137,7 +137,6 @@ class CosmiSocket extends ws_1.default {
             player.queue.current = null;
             player.queue.clear();
             this.manager.emit("queueEnd", player);
-            player.destroy();
         }
     }
     /** Emits when a track errors */
