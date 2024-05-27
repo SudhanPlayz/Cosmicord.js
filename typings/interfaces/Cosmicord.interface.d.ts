@@ -32,7 +32,7 @@ export interface CosmiEvents {
     /**
      * Emitted when a player is destroyed.
      */
-    playerDestoryed: [CosmiNode, CosmiPlayer];
+    playerDestroyed: [CosmiNode, CosmiPlayer];
     /**
      * Emitted when a player is moved to another voice channel.
      */
